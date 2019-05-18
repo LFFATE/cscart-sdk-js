@@ -4,7 +4,7 @@
     <title>Getting Started</title>
   </head>
   <body>
-    <script src="bundle.js"></script>
+    <script src="cscart-sdk.js"></script>
     <script>
       const api = new CsCartApiSdk({
         username: 'demomobile-project@simtechdev.com',
@@ -12,10 +12,8 @@
         apiUrl: 'https://demomobile-project.simtechdev.us/api/4.0/',
         siteUrl: 'https://demomobile-project.simtechdev.us/',
       })
-      console.log('LOG:')
-      api.setLanguage('ru')
-      console.log(api.getConfig())
-      // console.log(api)
+
+      api.setLanguage('en')
       api.products.get().then((r) => console.log(r)).catch((error) => console.log(error.response))
     </script>
   </body>

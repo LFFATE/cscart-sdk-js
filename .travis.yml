@@ -5,3 +5,12 @@ deploy:
   provider: npm
   email: "lffate@gmail.com"
   api_key: "${API_TOKEN}"
+  on:
+    branch: production
+
+notifications:
+  email:
+    recipients:
+    - lffate@gmail.com
+    on_success: change
+    on_failure: always

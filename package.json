@@ -4,7 +4,7 @@
   "description": "",
   "private": false,
   "scripts": {
-    "test": "mocha --watch -r ts-node/register ./test/**/*.ts",
+    "test": "mocha -r ts-node/register ./test/**/*.ts",
     "build": "webpack",
     "start": "webpack-dev-server --open"
   },

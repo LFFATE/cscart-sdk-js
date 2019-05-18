@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Getting Started</title>
+  </head>
+  <body>
+    <script src="bundle.js"></script>
+    <script>
+      const api = new CsCartApiSdk({
+        username: 'demomobile-project@simtechdev.com',
+        apiKey: '008ee61732e4c56a5ea2a13b807216b6',
+        apiUrl: 'https://demomobile-project.simtechdev.us/api/4.0/',
+        siteUrl: 'https://demomobile-project.simtechdev.us/',
+      })
+      console.log('LOG:')
+      api.setLanguage('ru')
+      console.log(api.getConfig())
+      // console.log(api)
+      api.products.get().then((r) => console.log(r)).catch((error) => console.log(error.response))
+    </script>
+  </body>
+</html>

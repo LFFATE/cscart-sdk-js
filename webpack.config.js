@@ -19,7 +19,7 @@ module.exports = {
     extensions: [ '.tsx', '.ts', '.js' ]
   },
   output: {
-    filename: 'bundle.js',
+    filename: 'cscart-sdk.js',
     path: path.resolve(__dirname, 'dist')
   }
 };

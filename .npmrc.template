@@ -1,3 +1,0 @@
-always-auth=true
-registry=https://packagecloud.io/saunterer/cscart-sdk/npm/
-//packagecloud.io/saunterer/cscart-sdk/npm/:_authToken=${API_TOKEN}

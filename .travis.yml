@@ -2,15 +2,6 @@ language: node_js
 node_js:
   - "7"
 deploy:
-  provider: script
-  script: "cp .npmrc.template $HOME/.npmrc && npm publish"
-  skip_cleanup: true
-  on:
-    branch: production
-
-notifications:
-  email:
-    recipients:
-    - lffate@gmail.com
-    on_success: change
-    on_failure: always
+  provider: npm
+  email: "lffate@gmail.com"
+  api_key: "${API_TOKEN}"

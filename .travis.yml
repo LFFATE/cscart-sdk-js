@@ -5,6 +5,7 @@ node_js:
 before_script:
   - npm install codecov -g
 after_success:
+  - npm run codecov
   - codecov
 deploy:
   provider: npm

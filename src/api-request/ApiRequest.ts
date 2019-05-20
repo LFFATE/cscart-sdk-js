@@ -1,61 +1,115 @@
+import { upperFirst, camelCase } from 'lodash'
+
 import { IApiRequestConfig } from './IApiRequestConfig'
-import { camelCase, upperFirst } from 'lodash'
+import EntityHandler from './EntityHandler'
 import { IConfig } from '../config/IConfig'
 
 class ApiRequest {
-  private requestUrl: string;
-  private client: any;
   private config: IConfig;
+  private params: any;
+  private handlerParams: any;
   private entity: string;
+  public handler: any;
 
   constructor(params: IApiRequestConfig, config: IConfig) {
-    this.requestUrl = params.requestUrl;
-    this.config     = config;
-    this.entity     = params.entity;
-    this.client     = params.client;
+    this.config         = config;
+    this.entity         = params.entity;
+    this.handlerParams  = {};
+    this.params         = {};
+
+    this.handler        = new EntityHandler[upperFirst(camelCase(this.entity)) + 'Request'](
+      this.handlerParams,
+      params,
+      this.config
+    );
   }
 
-  public get() {
-    const method = 'get' + upperFirst(camelCase(this.entity)) + 'Params';
-
-    return this.client.get(
-      this.requestUrl,
-      {
-        params: (<any>this)[method] ? (<any>this)[method]() : {}
-      }
-    )
-  }
-
-  public one(id: string) {
-    this.requestUrl += id
+  public limit(limit: number) {
+    this.params = {
+      ...this.params,
+      items_per_page: limit,
+    }
 
     return this
   }
 
-  private getSraProductsParams(): any {
-    return {
-      language:   this.config.language,
-      sl:         this.config.language,
-      lang_code:  this.config.language,
+  public page(page: number) {
+    this.params = {
+      ...this.params,
+      page: page,
+    }
+
+    return this
+  }
+
+  public byCompany(companyId: number) {
+    if (this.checkMethodAllowed(['products'])) {
+      throw new Error(`Can\'t get company for ${this.entity} entity`);
+    }
+
+    this.params = {
+      ...this.params,
+      company_id: companyId,
     }
   }
 
-  private getAuthTokensParams(): any {
-    return {
-      lang_code:  this.config.language,
+  public withProducts() {
+    if (this.checkMethodAllowed(['categories'])) {
+      throw new Error(`Can\'t get company for ${this.entity} entity`);
     }
   }
 
-  private getSraProfileParams(): any {
-    return {
-      lang_code:  this.config.language,
+  public withSubcategories() {
+    this.params = {
+      ...this.params,
+      subcats: 'Y',
     }
   }
 
-  private getSraProfileFieldsParams(): any {
-    return {
-      lang_code:  this.config.language,
-    }
+  public one(id: number|string) {
+    this.handlerParams.id = id
+
+    return this
+  }
+
+  public asc() {
+    this.handlerParams.order = 'asc';
+    return this
+  }
+
+  public desc() {
+    this.handlerParams.order = 'desc';
+    return this
+  }
+
+  public orderBy(orderBy: string) {
+    this.handlerParams.orderBy = orderBy;
+    return this
+  }
+
+  // private setSraProfileFieldsParams(): any {
+  //   this.params = {
+  //     ...this.params,
+  //     lang_code:  this.config.language,
+  //   }
+  // }
+
+  // private setAuthTokensParams(): any {
+  //   this.params = {
+  //     ...this.params,
+  //     lang_code:  this.config.language,
+  //   }
+  // }
+
+  // private setSraProfileParams(): any {
+  //   this.params = {
+  //     ...this.params,
+  //     lang_code:  this.config.language,
+  //   }
+  // }
+
+  private checkMethodAllowed(allowed: Array<string>): boolean {
+    return allowed.indexOf(this.entity) !== -1;
   }
 }
 

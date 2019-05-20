@@ -7,6 +7,7 @@
       "jsx": "react",
       "sourceMap": true,
       "moduleResolution": "node",
-      "allowJs": true
+      "allowJs": true,
+      "resolveJsonModule": true
     }
   }

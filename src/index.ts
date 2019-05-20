@@ -12,7 +12,7 @@ class CsCartApiSdk {
     this.config = config;
     this.client = axios.create({
       baseURL: this.config.apiUrl,
-      timeout: 15000,
+      timeout: 8000,
       headers: {
         'Cache-Control': 'no-cache',
         'Storefront-Api-Access-Key': this.config.apiKey,
@@ -25,21 +25,9 @@ class CsCartApiSdk {
       newConf.headers.common['Storefront-Api-Access-Key'] = this.config.apiKey;
       newConf.headers.common['Cache-Control'] = 'no-cache';
 
-      newConf.params = {
-        ...this.client.defaults.params,
-        // currency: state.cart.currency,
-        language:   this.config.language,
-        sl:         this.config.language,
-        lang_code:  this.config.language,
-      }
-
       if (this.config.userToken) {
         newConf.headers.common.Authorization = `Basic ${Base64.encode(this.config.userToken)}:`;
       }
-
-      // if (endsWith(conf.url, '/sra_cart_content/')) {
-      //   newConf.params.coupon_codes = state.cart.coupons;
-      // }
 
       return newConf;
     });
@@ -47,30 +35,40 @@ class CsCartApiSdk {
 
   // Rests
   get products() {
-    return this.getNewApiRequest('sra_products')
+    return this.getNewApiRequest('products')
   }
 
   get categories() {
-    return this.getNewApiRequest('sra_categories')
+    return this.getNewApiRequest('categories')
   }
 
   get auth() {
     return this.getNewApiRequest('auth_tokens')
   }
+
+  get layouts() {
+    return this.getNewApiRequest('bm_layouts')
+  }
   //---
 
   private getNewApiRequest(type: string) {
-    return new ApiRequest({
-      requestUrl: this.config.apiUrl + type + '/',
-      entity: type,
-      client: this.client
-    },
-      this.config
+    return new Proxy(
+      new ApiRequest({
+        entity: type,
+        client: this.client
+      },
+        this.config
+      ),
+      proxyResolver
     );
   }
 
   public getConfig(): IConfig {
     return this.config
+  }
+
+  public getClient(): AxiosInstance {
+    return this.client
   }
 
   public setLanguage(language: string): void {
@@ -80,4 +78,12 @@ class CsCartApiSdk {
 
 declare let global: any
 global.CsCartApiSdk = CsCartApiSdk;
+
+const proxyResolver = {
+  get(target: any, name: string) {
+
+    return target[name] || target.handler[name] || undefined
+  },
+};
+
 export default CsCartApiSdk

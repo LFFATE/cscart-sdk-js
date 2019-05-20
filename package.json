@@ -1,6 +1,6 @@
 {
   "name": "cscart-sdk",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "",
   "private": false,
   "scripts": {
@@ -12,7 +12,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/nock": "^10.0.3",
+    "chai": "^4.2.0",
     "mocha": "^6.1.4",
+    "nock": "^10.0.6",
     "ts-loader": "^6.0.0",
     "ts-node": "^8.1.0",
     "typescript": "^3.4.5",

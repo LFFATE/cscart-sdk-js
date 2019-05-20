@@ -1,6 +1,11 @@
 language: node_js
 node_js:
   - "7"
+
+scripts:
+  - npm install codecov -g
+after_success:
+  - codecov
 deploy:
   provider: npm
   email: "lffate@gmail.com"

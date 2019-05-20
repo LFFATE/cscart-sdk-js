@@ -4,7 +4,7 @@
   "description": "",
   "private": false,
   "scripts": {
-    "test": "mocha -r ts-node/register ./test/**/*.ts",
+    "test": "nyc mocha -r ts-node/register ./test/**/*.ts",
     "build": "webpack",
     "start": "webpack-dev-server --open",
     "codecov": "nyc report --reporter=json > coverage/coverage.json"

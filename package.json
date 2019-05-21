@@ -1,7 +1,8 @@
 {
   "name": "cscart-sdk",
-  "version": "1.1.6",
-  "description": "dist/cscart-sdk.js",
+  "version": "1.1.7",
+  "main": "dist/cscart-sdk.js",
+  "description": "",
   "private": false,
   "scripts": {
     "test": "mocha -r ts-node/register ./test/**/*.ts",

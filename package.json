@@ -1,6 +1,6 @@
 {
   "name": "cscart-sdk",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "main": "dist/cscart-sdk.js",
   "description": "",
   "types": "index.d.ts",

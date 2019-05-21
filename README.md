@@ -1,6 +1,6 @@
 [![Travis (.org)](https://img.shields.io/travis/LFFATE/cscart-sdk-js.svg?style=flat-square)](https://travis-ci.org/LFFATE/cscart-sdk-js)
 [![npm](https://img.shields.io/npm/dm/cscart-sdk.svg?style=flat-square)](https://www.npmjs.com/package/cscart-sdk)
-
+![Codecov](https://img.shields.io/codecov/c/gh/LFFATE/cscart-sdk-js.svg?style=flat-square)
 
 - [Description](#description)
 - [Installation](#installation)

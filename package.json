@@ -1,9 +1,9 @@
 {
   "name": "cscart-sdk",
-  "version": "1.1.11",
-  "main": "dist/cscart-sdk.js",
+  "version": "1.1.18",
+  "module": "./dist/cscart-sdk.js",
   "description": "",
-  "types": "index.d.ts",
+  "types": "./dist/src/index.d.ts",
   "private": false,
   "scripts": {
     "test": "mocha -r ts-node/register ./test/**/*.ts",

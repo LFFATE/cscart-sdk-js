@@ -55,7 +55,9 @@ const api = new CsCartApiSdk({
 ||one(number)|get single layout|`api.layouts.one(1).get()`|
 ||forLocation(string)|get layout for dispatch|`api.layouts.one(3).forLocation('index.index')`|
 ||withBlocks()|get blocks for a found layout|`api.layouts.one(3).forLocation('index.index').withBlocks()`|
-
+|categories||Categories|`api.categories`|
+||get()|get categories|`api.categories.get()`|
+||one(number)|get single category|`api.categories.one(50)`|
 ### Examples
 ```javascript
 // Get all products

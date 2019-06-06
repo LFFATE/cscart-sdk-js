@@ -15,7 +15,7 @@ export default class WishlistRequest extends AbstractRequest {
   public add(products: Array<IAddToWishlistProduct>): void;
 
   public add(products: IAddToWishlistProduct | Array<IAddToWishlistProduct>): void {
-    let requestProducts: any;
+    let requestProducts: any = {};
 
     if (Array.isArray(products)) {
       products.map((product: any) => {

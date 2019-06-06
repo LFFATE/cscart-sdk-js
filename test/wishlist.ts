@@ -17,6 +17,25 @@ describe('wishlist', function() {
           4: {
             product_id: 4,
             amount: /\d+/
+          },
+        }
+      })
+      .reply(201)
+
+    nock('https://cscart-sdk.com')
+      .post(/^\/api\/4.0\/sra_wish_list\//,  {
+        products: {
+          4: {
+            product_id: 4,
+            amount: /\d+/
+          },
+          5: {
+            product_id: 5,
+            amount: /\d+/
+          },
+          6: {
+            product_id: 6,
+            amount: /\d+/
           }
         }
       })
@@ -41,6 +60,22 @@ describe('wishlist', function() {
     const result = await api.wishlist.add({
       product_id: 4,
     });
+
+    assert.equal(result.status, '201')
+  })
+
+  it('Batch add to wishlist', async function() {
+    const result = await api.wishlist.add([
+      {
+        product_id: 4,
+      },
+      {
+        product_id: 5,
+      },
+      {
+        product_id: 6,
+      },
+    ]);
 
     assert.equal(result.status, '201')
   })

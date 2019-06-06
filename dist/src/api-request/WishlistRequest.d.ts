@@ -1,17 +1,16 @@
 import { IApiRequestConfig } from './IApiRequestConfig';
 import { IConfig } from '../config/IConfig';
 import AbstractRequest from './AbstractRequest';
-export default class CartContentRequest extends AbstractRequest {
+export default class WishlistRequest extends AbstractRequest {
     entityPath: string;
     prefix: string;
     constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
-    withShippings(): this;
-    add(product: IAddToCartProduct): any;
+    add(products: IAddToWishlistProduct): void;
+    add(products: Array<IAddToWishlistProduct>): void;
     protected setParams(): void;
 }
-interface IAddToCartProduct {
+interface IAddToWishlistProduct {
     product_id: number;
-    amount: number;
-    product_options: Array<any>;
+    product_options?: Array<any>;
 }
 export {};

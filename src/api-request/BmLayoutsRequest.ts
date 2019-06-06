@@ -4,11 +4,11 @@ import { IConfig } from '../config/IConfig'
 import AbstractRequest from './AbstractRequest'
 
 export default class BmLayoutsRequest extends AbstractRequest {
-  protected prefix: string = 'sra_';
+  entityPath: string = 'bm_layouts'
+  prefix: string = 'sra_'
 
   constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig) {
     super(handlerParams, params, config)
-    this.entity = 'bm_layouts';
   }
 
   public withBlocks() {

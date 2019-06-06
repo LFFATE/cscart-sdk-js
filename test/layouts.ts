@@ -4,9 +4,7 @@ import CsCartApiSdk from '../src/index'
 import { assert } from 'chai'
 import { startsWith } from 'lodash'
 
-import * as productsMock from './mock/products.json'
-
-describe('products', function() {
+describe('layouts', function() {
   let api: CsCartApiSdk;
 
   beforeEach(() => {

@@ -7,9 +7,11 @@ export default class AbstractRequest {
     protected handlerParams: any;
     protected params: any;
     protected config: IConfig;
-    protected prefix: string;
-    constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
+    protected _prefix: string;
+    protected constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
     protected buildUrl(): string;
+    protected prefix: string;
     protected setParams(): void;
     get(): any;
+    post(data?: any): any;
 }

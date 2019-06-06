@@ -1,7 +1,7 @@
 import 'mocha'
 import * as nock from 'nock'
 import CsCartApiSdk from '../src/index'
-import { assert } from 'chai'
+import { assert, expect } from 'chai'
 import { endsWith } from 'lodash'
 
 import * as productsMock from './mock/products.json'
@@ -10,10 +10,6 @@ describe('products', function() {
   let api: CsCartApiSdk;
 
   beforeEach(() => {
-    nock('https://cscart-sdk.com')
-      .get(/^\/api\/4.0\/sra_products\//)
-      .reply(200, productsMock)
-
     api = new CsCartApiSdk({
         username: 'lffate@cscart.sdk',
         apiKey: '008005ae5b0f45',
@@ -22,52 +18,56 @@ describe('products', function() {
       });
   });
 
-  it('Get single product', function() {
-    api.getClient().interceptors.request.use((conf) => {
-      assert(endsWith(conf.url, '/505/'))
+  it('Get single product', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_products/505/')
+      .reply(200, {product_id: []})
 
-      return conf
-    });
-    api.products.one(505).get().then((response: any) => {
-    })
+    const result = await api.products.one(505).get();
+    expect(result.data).to.have.property('product_id')
   })
 
-  it('Set language', function() {
+  it('Get products', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_products/')
+      .query({
+        language:   'en',
+        sl:         'en',
+        lang_code:  'en',
+      })
+      .reply(200, {products: []})
+
     api.setLanguage('en')
-    api.getClient().interceptors.request.use((conf) => {
-      assert.equal(
-        conf.params.language,
-        'en'
-      )
 
-      return conf
-    });
-    api.products.get()
+    const result = await api.products.get();
+    expect(result.data).to.have.property('products')
   })
 
-  it('Get products', function() {
-    api.setLanguage('en')
-    api.getClient().interceptors.request.use((conf) => {
-      assert.equal(
-        conf.params.language,
-        'en'
-      )
+  it('Limit and paginate products', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_products/')
+      .query({
+        page: 10,
+        items_per_page: 5
+      })
+      .reply(200, {paginated: true})
 
-      return conf
-    });
-    api.products.get().then((response: any) => {
-      assert.property(response.data, 'products')
-    })
+      const result = await api.products.limit(5).page(10).get();
+      expect(result.data).to.have.property('paginated')
   })
 
-  it('Limit and paginate products', function() {
-    api.getClient().interceptors.request.use((conf) => {
-      assert.equal(conf.params.items_per_page, 5)
-      assert.equal(conf.params.page, 10)
+  it('Get products by category', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_products/')
+      .query({
+        filter: 'Y',
+        cid: 113
+      })
+      .reply(200, {filtered: true})
 
-      return conf
-    });
-    api.products.limit(5).page(10).get().then((response: any) => {
-    })
+    const result = await api.products.forCategory(113).get();
+
+    assert.equal(result.status, '200')
+    expect(result.data).to.have.property('filtered')
   })
 });

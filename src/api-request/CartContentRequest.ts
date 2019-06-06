@@ -3,26 +3,29 @@ import { IApiRequestConfig } from './IApiRequestConfig'
 import { IConfig } from '../config/IConfig'
 import AbstractRequest from './AbstractRequest'
 
-export default class CategoriesRequest extends AbstractRequest {
-  entityPath: string = 'categories';
+export default class CartContentRequest extends AbstractRequest {
+  entityPath: string = 'cart_content'
   prefix: string = 'sra_'
 
   constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig) {
     super(handlerParams, params, config)
   }
 
-  protected buildUrl(): string {
-    let url = super.buildUrl()
-    return url + (this.handlerParams.id ? `${this.handlerParams.id}/` : '')
-  }
-
-  public withSubcategories() {
+  public withShippings() {
     this.params = {
       ...this.params,
-      subcategories: 'Y',
+      calculate_shipping: 'A',
     }
 
     return this
+  }
+
+  public add(product: IAddToCartProduct) {
+    return this.post({
+      products: {
+        [product.product_id]: product
+      }
+    })
   }
 
   protected setParams(): void {
@@ -32,13 +35,11 @@ export default class CategoriesRequest extends AbstractRequest {
       sl:         this.config.language,
       lang_code:  this.config.language,
     }
-
-    if (this.handlerParams.orderBy) {
-      this.params.sort_by = this.handlerParams.orderBy;
-    }
-
-    if (this.handlerParams.order) {
-      this.params.sort_order = this.handlerParams.order;
-    }
   }
+}
+
+interface IAddToCartProduct {
+  product_id: number;
+  amount: number;
+  product_options: Array<any>;
 }

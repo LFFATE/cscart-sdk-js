@@ -1,9 +1,7 @@
 import { IApiRequestConfig } from './IApiRequestConfig';
 import { IConfig } from '../config/IConfig';
 import AbstractRequest from './AbstractRequest';
-export default class ProductsRequest extends AbstractRequest {
+export default class AuthRequest extends AbstractRequest {
     constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
-    protected buildUrl(): string;
-    forCategory(categoryId: number): this;
-    protected setParams(): void;
+    login(email: string, password: string): any;
 }

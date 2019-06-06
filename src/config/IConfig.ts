@@ -4,6 +4,7 @@ export interface IConfig {
   apiUrl: string;
   siteUrl: string;
 
+  timeout?: number;
   language?: string;
   userToken?: string;
 }

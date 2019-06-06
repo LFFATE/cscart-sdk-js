@@ -59,13 +59,6 @@ class ApiRequest {
     }
   }
 
-  public withSubcategories() {
-    this.params = {
-      ...this.params,
-      subcats: 'Y',
-    }
-  }
-
   public one(id: number|string) {
     this.handlerParams.id = id
 
@@ -86,27 +79,6 @@ class ApiRequest {
     this.handlerParams.orderBy = orderBy;
     return this
   }
-
-  // private setSraProfileFieldsParams(): any {
-  //   this.params = {
-  //     ...this.params,
-  //     lang_code:  this.config.language,
-  //   }
-  // }
-
-  // private setAuthTokensParams(): any {
-  //   this.params = {
-  //     ...this.params,
-  //     lang_code:  this.config.language,
-  //   }
-  // }
-
-  // private setSraProfileParams(): any {
-  //   this.params = {
-  //     ...this.params,
-  //     lang_code:  this.config.language,
-  //   }
-  // }
 
   private checkMethodAllowed(allowed: Array<string>): boolean {
     return allowed.indexOf(this.entity) !== -1;

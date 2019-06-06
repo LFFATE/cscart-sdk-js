@@ -11,7 +11,6 @@ declare class ApiRequest {
     page(page: number): this;
     byCompany(companyId: number): void;
     withProducts(): void;
-    withSubcategories(): void;
     one(id: number | string): this;
     asc(): this;
     desc(): this;

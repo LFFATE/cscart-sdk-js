@@ -1,9 +1,9 @@
 import { IApiRequestConfig } from './IApiRequestConfig';
 import { IConfig } from '../config/IConfig';
 import AbstractRequest from './AbstractRequest';
-export default class ProductsRequest extends AbstractRequest {
+export default class CategoriesRequest extends AbstractRequest {
     constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
     protected buildUrl(): string;
-    forCategory(categoryId: number): this;
+    withSubcategories(): this;
     protected setParams(): void;
 }

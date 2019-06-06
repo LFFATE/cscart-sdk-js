@@ -50,6 +50,7 @@ const api = new CsCartApiSdk({
 ||orderBy(string)|Sort products by |`api.products.orderBy('product')`|
 ||asc()|Sort by increasing|`api.products.orderBy('price').asc()`|
 ||desc()|Sort by decreasing|`api.products.orderBy('price').desc()`|
+||forCategory(number)|Get products only for the category|`api.products.forCategory(114)`|
 |layouts||Layouts and blocks|`api.layouts`|
 ||get()|get layouts list|`api.layouts.get()`|
 ||one(number)|get single layout|`api.layouts.one(1).get()`|
@@ -58,6 +59,16 @@ const api = new CsCartApiSdk({
 |categories||Categories|`api.categories`|
 ||get()|get categories|`api.categories.get()`|
 ||one(number)|get single category|`api.categories.one(50)`|
+|auth||Auth tokens|`api.auth`|
+||login(email: string, password: string)|Try to login with email and password|`api.auth.login('user@email.com', 'password').then((response: any) => console.log(response.token))`|
+|cart||Cart|`api.cart`|
+||get()|Get cart content|`api.cart.get()`|
+||withShippings()|response will contains shippings info|`api.cart.withShippings().get()`|
+||add(Array\<any\>)|add products to cart|`api.cart.add([{product_id: 5, amount: 1}])`|
+|wishlist||Wishlist|`api.wishlist`|
+||get()|Get wishlist content|`api.wishlist.get()`|
+||add(Array\<any\>)|add products to wishlist|`api.wishlist.add([{product_id: 5}, {product_id: 18}])`|
+||add(\<any\>)|add products to wishlist|`api.wishlist.add({product_id: 5})`|
 ### Examples
 ```javascript
 // Get all products

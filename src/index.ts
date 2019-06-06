@@ -12,7 +12,7 @@ class CsCartApiSdk {
     this.config = config;
     this.client = axios.create({
       baseURL: this.config.apiUrl,
-      timeout: 8000,
+      timeout: this.config.timeout ? this.config.timeout : 8000,
       headers: {
         'Cache-Control': 'no-cache',
         'Storefront-Api-Access-Key': this.config.apiKey,
@@ -49,6 +49,18 @@ class CsCartApiSdk {
   get layouts() {
     return this.getNewApiRequest('bm_layouts')
   }
+
+  get orders() {
+    return this.getNewApiRequest('orders')
+  }
+
+  get cart() {
+    return this.getNewApiRequest('cart_content')
+  }
+
+  get wishlist() {
+    return this.getNewApiRequest('wishlist')
+  }
   //---
 
   private getNewApiRequest(type: string) {
@@ -73,6 +85,10 @@ class CsCartApiSdk {
 
   public setLanguage(language: string): void {
     this.config.language = language;
+  }
+
+  public setUserToken(token: string): void {
+    this.config.userToken = token;
   }
 }
 

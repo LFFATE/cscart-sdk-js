@@ -8,9 +8,12 @@ declare class CsCartApiSdk {
     readonly categories: any;
     readonly auth: any;
     readonly layouts: any;
+    readonly orders: any;
+    readonly cart: any;
     private getNewApiRequest;
     getConfig(): IConfig;
     getClient(): AxiosInstance;
     setLanguage(language: string): void;
+    setUserToken(token: string): void;
 }
 export default CsCartApiSdk;

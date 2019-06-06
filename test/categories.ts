@@ -1,18 +1,15 @@
 import 'mocha'
 import * as nock from 'nock'
 import CsCartApiSdk from '../src/index'
-import { assert } from 'chai'
+import { assert, expect } from 'chai'
 import { endsWith } from 'lodash'
 
 // import * as productsMock from './mock/products.json'
 
-describe('products', function() {
+describe('categories', function() {
   let api: CsCartApiSdk;
 
   beforeEach(() => {
-    nock('https://cscart-sdk.com')
-      .get(/^\/api\/4.0\/sra_categories\//)
-      .reply(200)
 
     api = new CsCartApiSdk({
         username: 'lffate@cscart.sdk',
@@ -22,14 +19,28 @@ describe('products', function() {
       });
   });
 
-  it('Get single category', function() {
-    api.getClient().interceptors.request.use((conf) => {
-      assert(endsWith(conf.url, '/505/'))
+  it('Get single category', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_categories/505/')
+      .reply(200, {category_id: 505})
 
-      return conf
-    });
-    api.categories.one(505).get().then((response: any) => {
-    })
+    const result = await api.categories.one(505).get();
+
+    assert.equal(result.status, '200')
+    expect(result.data).to.have.property('category_id')
   })
 
+  it('Get products by category', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_categories/1/')
+      .query({
+        subcategories: 'Y'
+      })
+      .reply(200, {subcategories: []})
+
+    const result = await api.categories.one(1).withSubcategories().get();
+
+    assert.equal(result.status, '200')
+    expect(result.data).to.have.property('subcategories')
+  })
 });

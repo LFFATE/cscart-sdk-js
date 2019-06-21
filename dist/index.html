@@ -14,10 +14,10 @@
       })
 
       api.setLanguage('en')
-      api.products.limit(2).page(2).orderBy('product').desc().get().then((r) => console.log(r)).catch((error) => console.log(error.response))
-      api.products.one(5769).get().then((r) => console.log(r)).catch((error) => console.log(error.response))
-      api.layouts.one(3).forLocation('index.index').withBlocks().get().then((r) => console.log(r)).catch((error) => console.log(error.response))
-      api.categories.one(416).withSubcategories().get().then((r) => console.log(r)).catch((error) => console.log(error.response))
+      // api.products.setIconSize([200, 200]).limit(2).page(2).orderBy('product').desc().get().then((r) => console.log(r)).catch((error) => console.log(error.response))
+      api.products.setIconSize([200, 200]).one(5769).get().then((r) => console.log(r)).catch((error) => console.log(error.response))
+      // api.layouts.one(3).forLocation('index.index').withBlocks().get().then((r) => console.log(r)).catch((error) => console.log(error.response))
+      // api.categories.one(416).withSubcategories().get().then((r) => console.log(r)).catch((error) => console.log(error.response))
     </script>
   </body>
 </html>

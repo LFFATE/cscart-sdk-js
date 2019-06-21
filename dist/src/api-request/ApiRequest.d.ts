@@ -15,6 +15,7 @@ declare class ApiRequest {
     asc(): this;
     desc(): this;
     orderBy(orderBy: string): this;
+    setIconSize(size: [number, number]): this;
     private checkMethodAllowed;
 }
 export default ApiRequest;

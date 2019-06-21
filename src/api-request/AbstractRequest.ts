@@ -1,4 +1,5 @@
 import { camelCase, upperFirst } from 'lodash'
+import * as qs from 'qs'
 
 import { IConfig } from '../config/IConfig'
 import { IApiRequestConfig } from './IApiRequestConfig'
@@ -31,7 +32,12 @@ export default abstract class AbstractRequest {
     return this.client.get(
       this.buildUrl(),
       {
-        params: this.params
+        params: {
+          ...this.params
+        },
+        paramsSerializer: (params: any) => {
+          return qs.stringify(params)
+        }
       }
     )
   }
@@ -42,6 +48,14 @@ export default abstract class AbstractRequest {
     return this.client.post(
       this.buildUrl(),
       data
+    )
+  }
+
+  public delete() {
+    this.setParams()
+
+    return this.client.delete(
+      this.buildUrl()
     )
   }
 }

@@ -12,6 +12,10 @@ describe('wishlist', function() {
       .reply(200)
 
     nock('https://cscart-sdk.com')
+      .delete(/^\/api\/4.0\/sra_wish_list\/192/)
+      .reply(204)
+
+    nock('https://cscart-sdk.com')
       .post(/^\/api\/4.0\/sra_wish_list\//,  {
         products: {
           4: {
@@ -62,6 +66,12 @@ describe('wishlist', function() {
     });
 
     assert.equal(result.status, '201')
+  })
+
+  it('Remove from wishlist', async function() {
+    const result = await api.wishlist.one(192).remove();
+
+    assert.equal(result.status, '204')
   })
 
   it('Batch add to wishlist', async function() {

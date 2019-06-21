@@ -80,6 +80,20 @@ class ApiRequest {
     return this
   }
 
+  public setIconSize(size: [number, number]) {
+    if (!this.params.icon_sizes) {
+      this.params.icon_sizes = {
+        main_pair: [],
+        image_pairs: []
+      };
+    }
+
+    this.params.icon_sizes.main_pair.push(size)
+    this.params.icon_sizes.image_pairs.push(size)
+
+    return this
+  }
+
   private checkMethodAllowed(allowed: Array<string>): boolean {
     return allowed.indexOf(this.entity) !== -1;
   }

@@ -1,6 +1,6 @@
 {
   "name": "cscart-sdk",
-  "version": "1.5.91",
+  "version": "1.5.96",
   "module": "./dist/cscart-sdk.js",
   "description": "",
   "types": "./dist/src/index.d.ts",
@@ -34,8 +34,10 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "@types/qs": "^6.5.3",
     "axios": "^0.18.0",
     "js-base64": "^2.5.1",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "qs": "^6.7.0"
   }
 }

@@ -5,8 +5,10 @@ export default class WishlistRequest extends AbstractRequest {
     entityPath: string;
     prefix: string;
     constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
+    protected buildUrl(): string;
     add(products: IAddToWishlistProduct): void;
     add(products: Array<IAddToWishlistProduct>): void;
+    remove(): void;
     protected setParams(): void;
 }
 interface IAddToWishlistProduct {

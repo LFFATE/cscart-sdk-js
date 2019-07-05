@@ -6,7 +6,8 @@ export default class CartContentRequest extends AbstractRequest {
     prefix: string;
     constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
     withShippings(): this;
-    add(product: IAddToCartProduct): any;
+    protected buildUrl(): string;
+    add(products: IAddToCartProduct | Array<IAddToCartProduct>): void;
     protected setParams(): void;
 }
 interface IAddToCartProduct {

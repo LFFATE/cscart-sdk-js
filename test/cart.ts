@@ -27,6 +27,29 @@ describe('cart', function() {
       })
       .reply(201)
 
+    nock('https://cscart-sdk.com')
+      .post(/^\/api\/4.0\/sra_cart_content\//,  {
+        products: {
+          4: {
+            product_id: 4,
+            amount: 1
+          },
+          5: {
+            product_id: 5,
+            amount: 1
+          },
+          49: {
+            product_id: 49,
+            amount: 5
+          }
+        }
+      })
+      .reply(201)
+
+    nock('https://cscart-sdk.com')
+      .delete(/^\/api\/4.0\/sra_cart_content\/\d+/)
+      .reply(204)
+
     api = new CsCartApiSdk({
         username: 'lffate@cscart.sdk',
         apiKey: '008005ae5b0f45',
@@ -52,6 +75,31 @@ describe('cart', function() {
       product_id: 4,
       amount: 1,
     });
+
+    assert.equal(result.status, '201')
+  })
+
+  it('Remove from cart', async function() {
+    const result = await api.cart.one(145642).delete();
+
+    assert.equal(result.status, '204')
+  })
+
+  it('Batch add to cart', async function() {
+    const result = await api.cart.add([
+      {
+        product_id: 4,
+        amount: 1,
+      },
+      {
+        product_id: 5,
+        amount: 1,
+      },
+      {
+        product_id: 49,
+        amount: 5,
+      },
+    ]);
 
     assert.equal(result.status, '201')
   })

@@ -20,11 +20,28 @@ export default class CartContentRequest extends AbstractRequest {
     return this
   }
 
-  public add(product: IAddToCartProduct) {
+  protected buildUrl(): string {
+    let url = super.buildUrl()
+    url = url + (this.handlerParams.id ? `${this.handlerParams.id}/` : '');
+
+    return url
+  }
+
+  public add(products: IAddToCartProduct | Array<IAddToCartProduct>): void {
+    let requestProducts: any = {};
+
+    if (Array.isArray(products)) {
+      products.map((product: any) => {
+        requestProducts[product.product_id] = {...product};
+      })
+    } else {
+      requestProducts = {
+        [products.product_id]: {...products}
+      };
+    }
+
     return this.post({
-      products: {
-        [product.product_id]: product
-      }
+      products: requestProducts
     })
   }
 

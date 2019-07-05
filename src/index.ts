@@ -61,6 +61,10 @@ class CsCartApiSdk {
   get wishlist() {
     return this.getNewApiRequest('wishlist')
   }
+
+  get profile() {
+    return this.getNewApiRequest('profile')
+  }
   //---
 
   private getNewApiRequest(type: string) {

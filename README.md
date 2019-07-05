@@ -2,13 +2,13 @@
 [![npm](https://img.shields.io/npm/dm/cscart-sdk.svg?style=flat-square)](https://www.npmjs.com/package/cscart-sdk)
 ![Codecov](https://img.shields.io/codecov/c/gh/LFFATE/cscart-sdk-js.svg?style=flat-square)
 
-- [Description](#description)
-- [Installation](#installation)
-  - [in HTML](#in-html)
-  - [TypeScript](#typescript)
-- [Using](#using)
-  - [Table of entities and possibilities](#table-of-entities-and-possibilities)
-    - [Examples](#examples)
+- [Description](#Description)
+- [Installation](#Installation)
+  - [in HTML](#in-HTML)
+  - [TypeScript](#TypeScript)
+- [Using](#Using)
+  - [Table of entities and possibilities](#Table-of-entities-and-possibilities)
+    - [Examples](#Examples)
 # Description
 
 # Installation
@@ -69,6 +69,8 @@ const api = new CsCartApiSdk({
 ||get()|Get wishlist content|`api.wishlist.get()`|
 ||add(Array\<any\>)|add products to wishlist|`api.wishlist.add([{product_id: 5}, {product_id: 18}])`|
 ||add(\<any\>)|add products to wishlist|`api.wishlist.add({product_id: 5})`|
+|profile||Profile|api.profile|
+||get()|Get profile for current user|api.profile.get()|
 ### Examples
 ```javascript
 // Get all products

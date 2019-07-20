@@ -70,6 +70,19 @@ describe('cart', function() {
     assert.equal(result.status, '200')
   })
 
+  it('Get cart with selected shippings', async function() {
+    nock('https://cscart-sdk.com')
+      .get(/^\/api\/4.0\/sra_cart_content\//)
+      .query({
+        calculate_shipping: 'A',
+        shipping_ids: [1]
+      })
+      .reply(200)
+
+    const result = await api.cart.withShippings([1]).get();
+    assert.equal(result.status, '200')
+  })
+
   it('Add to cart', async function() {
     const result = await api.cart.add({
       product_id: 4,
@@ -100,6 +113,24 @@ describe('cart', function() {
         amount: 5,
       },
     ]);
+
+    assert.equal(result.status, '201')
+  })
+
+  it('Save user data', async function() {
+    nock('https://cscart-sdk.com')
+      .put(/^\/api\/4.0\/sra_cart_content\//,  {
+        user_data: {
+          firstname: 'Mikhail',
+          email: 'new-email@example.com',
+        }
+      })
+      .reply(201)
+
+    const result = await api.cart.saveUserData({
+      firstname: 'Mikhail',
+      email: 'new-email@example.com'
+    });
 
     assert.equal(result.status, '201')
   })

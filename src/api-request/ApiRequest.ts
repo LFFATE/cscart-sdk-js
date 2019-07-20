@@ -13,7 +13,7 @@ class ApiRequest {
 
   constructor(params: IApiRequestConfig, config: IConfig) {
     this.config         = config;
-    this.entity         = params.entity;
+    this.entity         = params.entity!;
     this.handlerParams  = {};
     this.params         = {};
 

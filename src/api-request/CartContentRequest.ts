@@ -11,10 +11,17 @@ export default class CartContentRequest extends AbstractRequest {
     super(handlerParams, params, config)
   }
 
-  public withShippings() {
+  public withShippings(ids?: Array<number>) {
     this.params = {
       ...this.params,
       calculate_shipping: 'A',
+    }
+
+    if (ids && ids.length) {
+      this.params = {
+        ...this.params,
+        shipping_ids: ids,
+      }
     }
 
     return this
@@ -42,6 +49,12 @@ export default class CartContentRequest extends AbstractRequest {
 
     return this.post({
       products: requestProducts
+    })
+  }
+
+  public saveUserData(userData: any): void {
+    return this.put({
+      user_data: userData
     })
   }
 

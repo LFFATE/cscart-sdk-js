@@ -54,6 +54,10 @@ class CsCartApiSdk {
     return this.getNewApiRequest('orders')
   }
 
+  get settlements() {
+    return this.getNewApiRequest('settlements')
+  }
+
   get cart() {
     return this.getNewApiRequest('cart_content')
   }

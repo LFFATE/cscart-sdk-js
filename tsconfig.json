@@ -1,13 +1,13 @@
 {
     "compilerOptions": {
-      "outDir": "./dist/",
+      "outDir": "./dist",
       "noImplicitAny": true,
-      "module": "commonJS",
+      "module": "commonjs",
       "target": "es5",
-      "jsx": "react",
       "sourceMap": true,
-      "moduleResolution": "node",
       "declaration": true,
       "resolveJsonModule": true
-    }
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "**/__tests__/*"]
   }

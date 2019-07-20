@@ -1,9 +1,12 @@
 {
   "name": "cscart-sdk",
-  "version": "1.6.7",
-  "module": "./dist/cscart-sdk.js",
+  "version": "1.7.83",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "description": "",
-  "types": "./dist/src/index.d.ts",
   "private": false,
   "scripts": {
     "test": "mocha -r ts-node/register ./test/**/*.ts",
@@ -13,12 +16,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@types/chai": "^4.1.7",
-    "@types/js-base64": "^2.3.1",
-    "@types/lodash": "^4.14.129",
     "@types/mocha": "^5.2.6",
     "@types/nock": "^10.0.3",
     "chai": "^4.2.0",
@@ -35,6 +36,8 @@
   },
   "dependencies": {
     "@types/qs": "^6.5.3",
+    "@types/js-base64": "^2.3.1",
+    "@types/lodash": "^4.14.129",
     "axios": "^0.18.0",
     "js-base64": "^2.5.1",
     "lodash": "^4.17.11",

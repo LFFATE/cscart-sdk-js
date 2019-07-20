@@ -63,14 +63,23 @@ const api = new CsCartApiSdk({
 ||login(email: string, password: string)|Try to login with email and password|`api.auth.login('user@email.com', 'password').then((response: any) => console.log(response.token))`|
 |cart||Cart|`api.cart`|
 ||get()|Get cart content|`api.cart.get()`|
-||withShippings()|response will contains shippings info|`api.cart.withShippings().get()`|
+||withShippings(ids?: Array\<number\>)|response will contains shippings info. Ids - chosen_shipping|`api.cart.withShippings([4, 5]).get()`|
 ||add(Array\<any\>)|add products to cart|`api.cart.add([{product_id: 5, amount: 1}])`|
+||`saveUserData(<any>)`|Save user info at cart|`api.cart.saveUserData({ firstname: 'John', s_city: 'Moscow'})`|
 |wishlist||Wishlist|`api.wishlist`|
 ||get()|Get wishlist content|`api.wishlist.get()`|
 ||add(Array\<any\>)|add products to wishlist|`api.wishlist.add([{product_id: 5}, {product_id: 18}])`|
 ||add(\<any\>)|add products to wishlist|`api.wishlist.add({product_id: 5})`|
-|profile||Profile|api.profile|
-||get()|Get profile for current user|api.profile.get()|
+|profile||Profile|`api.profile`|
+||get()|Get profile for current user|`api.profile.get()`|
+||form()|Get form fields for...|`api.profile.form()...`|
+||forAddProfile()|Get form fields for registration|`api.profile.form().forAddProfile().get()`|
+||forUpdateProfile()|Get form fields for update profile|`api.profile.form().forUpdateProfile().get()`|
+||forAddOrder()|Get form fields for checkout|`api.profile.form().forAddOrder().get()`|
+||forUpdateOrder()|-|`api.profile.form().forUpdateOrder().get()`|
+||create()|Create profile|`api.profile.create({ email: email@email.com", password1: "12345", password2: "12345" })`|
+|settlements||Settlement|`api.settlements`|
+||`create({ orderId: number, repay?: boolean, ...data})`|create request to create settlement|`api.settlements.create({ orderId: 101 })`|
 ### Examples
 ```javascript
 // Get all products

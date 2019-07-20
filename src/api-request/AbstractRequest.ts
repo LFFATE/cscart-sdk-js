@@ -47,7 +47,32 @@ export default abstract class AbstractRequest {
 
     return this.client.post(
       this.buildUrl(),
-      data
+      data,
+      {
+        params: {
+          ...this.params
+        },
+        paramsSerializer: (params: any) => {
+          return qs.stringify(params)
+        }
+      }
+    )
+  }
+
+  public put(data: any = {}) {
+    this.setParams()
+
+    return this.client.put(
+      this.buildUrl(),
+      data,
+      {
+        params: {
+          ...this.params
+        },
+        paramsSerializer: (params: any) => {
+          return qs.stringify(params)
+        }
+      }
     )
   }
 

@@ -1,16 +1,16 @@
 import { IApiRequestConfig } from './IApiRequestConfig';
 import { IConfig } from '../config/IConfig';
 import AbstractRequest from './AbstractRequest';
-export default class OrdersRequest extends AbstractRequest {
+export default class SettlementsRequest extends AbstractRequest {
     entityPath: string;
     prefix: string;
     constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
-    create(order: INewOrder): any;
+    create(data: INewSettlement): any;
     protected setParams(): void;
 }
-interface INewOrder {
-    products: Array<any>;
-    shippingIds: Array<number>;
-    paymentId: number;
+interface INewSettlement {
+    orderId: number;
+    repay?: boolean;
+    [others: string]: any;
 }
 export {};

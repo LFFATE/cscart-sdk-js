@@ -13,5 +13,6 @@ export default abstract class AbstractRequest {
     protected setParams(): void;
     get(): any;
     post(data?: any): any;
+    put(data?: any): any;
     delete(): any;
 }

@@ -1,3 +1,5 @@
+import { forOwn, snakeCase } from 'lodash'
+
 import { IApiRequestConfig } from './IApiRequestConfig'
 
 import { IConfig } from '../config/IConfig'
@@ -12,19 +14,37 @@ export default class OrdersRequest extends AbstractRequest {
   }
 
   public create(order: INewOrder) {
-    let products = {};
+    let productsObject = {};
 
     order.products.map((product: any) => {
-      products = {
-        ...products,
+      productsObject = {
+        ...productsObject,
         [product.cart_id]: product,
       }
     })
 
-    return this.post({
+    const {
       products,
-      shipping_ids: order.shippingIds,
-      payment_id: order.paymentId,
+      shippingIds,
+      paymentId,
+      userData,
+      paymentInfo,
+      ...rest
+    } = order;
+
+    return this.post({
+      products: productsObject,
+      shipping_ids: shippingIds,
+      payment_id: paymentId,
+      user_data: userData,
+      payment_info:
+        forOwn(paymentInfo, (value, key) => {
+          delete paymentInfo[key]
+
+          paymentInfo[snakeCase(key)] = value;
+        })
+      ,
+      ...rest
     })
   }
 
@@ -39,7 +59,11 @@ export default class OrdersRequest extends AbstractRequest {
 }
 
 interface INewOrder {
-  products: Array<any>,
-  shippingIds: Array<number>,
-  paymentId: number,
+  products: Array<any>;
+  shippingIds: Array<number>;
+  paymentId: number;
+  userData?: any;
+  paymentInfo: any;
+
+  [others: string]: any;
 }

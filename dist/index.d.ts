@@ -5,6 +5,7 @@ declare class CsCartApiSdk {
     protected client: AxiosInstance;
     constructor(config: IConfig);
     readonly products: any;
+    readonly pages: any;
     readonly categories: any;
     readonly auth: any;
     readonly layouts: any;

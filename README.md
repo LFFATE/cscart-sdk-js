@@ -2,13 +2,13 @@
 [![npm](https://img.shields.io/npm/dm/cscart-sdk.svg?style=flat-square)](https://www.npmjs.com/package/cscart-sdk)
 ![Codecov](https://img.shields.io/codecov/c/gh/LFFATE/cscart-sdk-js.svg?style=flat-square)
 
-- [Description](#Description)
-- [Installation](#Installation)
-  - [in HTML](#in-HTML)
-  - [TypeScript](#TypeScript)
-- [Using](#Using)
-  - [Table of entities and possibilities](#Table-of-entities-and-possibilities)
-    - [Examples](#Examples)
+- [Description](#description)
+- [Installation](#installation)
+  - [in HTML](#in-html)
+  - [TypeScript](#typescript)
+- [Using](#using)
+  - [Table of entities and possibilities](#table-of-entities-and-possibilities)
+    - [Examples](#examples)
 # Description
 
 # Installation
@@ -51,6 +51,7 @@ const api = new CsCartApiSdk({
 ||asc()|Sort by increasing|`api.products.orderBy('price').asc()`|
 ||desc()|Sort by decreasing|`api.products.orderBy('price').desc()`|
 ||forCategory(number)|Get products only for the category|`api.products.forCategory(114)`|
+||forOptions([{ optionId: number, value: any }])|Get product with selected options|`api.products.forOptions([{ optionId: 17, value: 7 }])`|
 |layouts||Layouts and blocks|`api.layouts`|
 ||get()|get layouts list|`api.layouts.get()`|
 ||one(number)|get single layout|`api.layouts.one(1).get()`|
@@ -80,6 +81,14 @@ const api = new CsCartApiSdk({
 ||create()|Create profile|`api.profile.create({ email: email@email.com", password1: "12345", password2: "12345" })`|
 |settlements||Settlement|`api.settlements`|
 ||`create({ orderId: number, repay?: boolean, ...data})`|create request to create settlement|`api.settlements.create({ orderId: 101 })`|
+|pages||Pages|`api.pages`|
+||get()|get pages list|`api.pages.get()`|
+||one(number)|get single page by id|`api.pages.one(1).get()`|
+||limit(number)|Limit products count on request result| `api.pages.limit(50).get()`|
+||orderBy(string)|Sort pages by |`api.pages.orderBy('product')`|
+||asc()|Sort by increasing|`api.pages.orderBy('price').asc()`|
+||desc()|Sort by decreasing|`api.pages.orderBy('price').desc()`|
+||forParentPage(number)|Get pages only for the parent page|`api.pages.forParentPage(114)`|
 ### Examples
 ```javascript
 // Get all products

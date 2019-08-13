@@ -1,4 +1,5 @@
-import { forOwn, snakeCase } from 'lodash'
+import forOwn from 'lodash/forOwn'
+import snakeCase from 'lodash/snakeCase'
 
 import { IApiRequestConfig } from './IApiRequestConfig'
 

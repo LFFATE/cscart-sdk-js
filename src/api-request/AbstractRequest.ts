@@ -1,5 +1,4 @@
-import { camelCase, upperFirst } from 'lodash'
-import * as qs from 'qs'
+import { stringify } from 'qs'
 
 import { IConfig } from '../config/IConfig'
 import { IApiRequestConfig } from './IApiRequestConfig'
@@ -36,7 +35,7 @@ export default abstract class AbstractRequest {
           ...this.params
         },
         paramsSerializer: (params: any) => {
-          return qs.stringify(params)
+          return stringify(params)
         }
       }
     )
@@ -53,7 +52,7 @@ export default abstract class AbstractRequest {
           ...this.params
         },
         paramsSerializer: (params: any) => {
-          return qs.stringify(params)
+          return stringify(params)
         }
       }
     )
@@ -70,7 +69,7 @@ export default abstract class AbstractRequest {
           ...this.params
         },
         paramsSerializer: (params: any) => {
-          return qs.stringify(params)
+          return stringify(params)
         }
       }
     )

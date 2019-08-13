@@ -38,6 +38,10 @@ class CsCartApiSdk {
     return this.getNewApiRequest('products')
   }
 
+  get pages() {
+    return this.getNewApiRequest('pages')
+  }
+
   get categories() {
     return this.getNewApiRequest('categories')
   }

@@ -1,5 +1,5 @@
 import 'mocha'
-import * as nock from 'nock'
+import nock from 'nock'
 import CsCartApiSdk from '../src/index'
 import { assert } from 'chai'
 

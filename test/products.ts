@@ -1,10 +1,7 @@
 import 'mocha'
-import * as nock from 'nock'
+import nock from 'nock'
 import CsCartApiSdk from '../src/index'
 import { assert, expect } from 'chai'
-import { endsWith } from 'lodash'
-
-import * as productsMock from './mock/products.json'
 
 describe('products', function() {
   let api: CsCartApiSdk;
@@ -25,6 +22,15 @@ describe('products', function() {
 
     const result = await api.products.one(505).get();
     expect(result.data).to.have.property('product_id')
+  })
+
+  it('Get single product for options', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_products/505/?selected_options%5B7%5D=17')
+      .reply(200, {product_id: []})
+
+    const result = await api.products.one(505).forOptions([{ optionId: 7, value: 17 }]).get();
+    assert.equal(result.status, '200')
   })
 
   it('Get products', async function() {

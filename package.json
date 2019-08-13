@@ -1,6 +1,6 @@
 {
   "name": "cscart-sdk",
-  "version": "1.7.83",
+  "version": "1.7.96",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -23,6 +23,7 @@
     "@types/mocha": "^5.2.6",
     "@types/nock": "^10.0.3",
     "chai": "^4.2.0",
+    "compression-webpack-plugin": "^3.0.0",
     "mocha": "^6.1.4",
     "nock": "^10.0.6",
     "nyc": "^14.1.1",
@@ -35,12 +36,13 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "@types/qs": "^6.5.3",
     "@types/js-base64": "^2.3.1",
-    "@types/lodash": "^4.14.129",
-    "axios": "^0.18.0",
+    "@types/lodash": "^4.14.136",
+    "@types/qs": "^6.5.3",
+    "axios": "^0.18.1",
     "js-base64": "^2.5.1",
-    "lodash": "^4.17.11",
-    "qs": "^6.7.0"
+    "lodash": "^4.17.15",
+    "qs": "^6.7.0",
+    "tslib": "^1.10.0"
   }
 }

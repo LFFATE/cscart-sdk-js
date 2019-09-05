@@ -34,7 +34,8 @@ describe('categories', function() {
     nock('https://cscart-sdk.com')
       .get('/api/4.0/sra_categories/1/')
       .query({
-        subcategories: 'Y'
+        get_subcategories: 'Y',
+        subcategories: 'Y',
       })
       .reply(200, {subcategories: []})
 

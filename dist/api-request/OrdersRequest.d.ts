@@ -5,6 +5,7 @@ export default class OrdersRequest extends AbstractRequest {
     entityPath: string;
     prefix: string;
     constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
+    protected buildUrl(): string;
     create(order: INewOrder): any;
     protected setParams(): void;
 }

@@ -92,6 +92,22 @@ describe('cart', function() {
     assert.equal(result.status, '201')
   })
 
+  it('Update product at cart', async function() {
+    nock('https://cscart-sdk.com')
+      .put(/^\/api\/4.0\/sra_cart_content\/145642\//,  {
+        product_id: 4,
+        amount: 3
+      })
+      .reply(201)
+
+    const result = await api.cart.one('145642').update({
+      product_id: 4,
+      amount: 3,
+    });
+
+    assert.equal(result.status, '201')
+  })
+
   it('Remove from cart', async function() {
     const result = await api.cart.one(145642).delete();
 

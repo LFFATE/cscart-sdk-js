@@ -52,6 +52,10 @@ export default class CartContentRequest extends AbstractRequest {
     })
   }
 
+  public update(product: any): void {
+    return this.put(product)
+  }
+
   public saveUserData(userData: any): void {
     return this.put({
       user_data: userData

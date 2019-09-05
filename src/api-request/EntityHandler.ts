@@ -8,6 +8,8 @@ import PagesRequest from './PagesRequest'
 import BmLayoutsRequest from './BmLayoutsRequest'
 import CategoriesRequest from './CategoriesRequest'
 import ProfileRequest from './ProfileRequest'
+import SettingsRequest from './SettingsRequest'
+import TestimonialsRequest from './TestimonialsRequest'
 
 const EntityHandler: any = {
   CartContentRequest,
@@ -20,6 +22,8 @@ const EntityHandler: any = {
   BmLayoutsRequest,
   CategoriesRequest,
   ProfileRequest,
+  SettingsRequest,
+  TestimonialsRequest,
 }
 
 export default EntityHandler

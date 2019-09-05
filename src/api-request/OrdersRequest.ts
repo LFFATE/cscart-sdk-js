@@ -14,6 +14,13 @@ export default class OrdersRequest extends AbstractRequest {
     super(handlerParams, params, config)
   }
 
+  protected buildUrl(): string {
+    let url = super.buildUrl();
+    url = url + (this.handlerParams.id ? `${this.handlerParams.id}/` : '');
+
+    return url
+  }
+
   public create(order: INewOrder) {
     let productsObject = {};
 

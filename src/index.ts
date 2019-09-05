@@ -73,6 +73,14 @@ class CsCartApiSdk {
   get profile() {
     return this.getNewApiRequest('profile')
   }
+
+  get settings() {
+    return this.getNewApiRequest('settings')
+  }
+
+  get testimonials() {
+    return this.getNewApiRequest('testimonials')
+  }
   //---
 
   private getNewApiRequest(type: string) {

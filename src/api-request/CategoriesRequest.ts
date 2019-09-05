@@ -19,6 +19,10 @@ export default class CategoriesRequest extends AbstractRequest {
   public withSubcategories() {
     this.params = {
       ...this.params,
+      get_subcategories: 'Y',
+      /**
+       * @deprecated
+       */
       subcategories: 'Y',
     }
 

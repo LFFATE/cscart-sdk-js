@@ -89,6 +89,15 @@ const api = new CsCartApiSdk({
 ||asc()|Sort by increasing|`api.pages.orderBy('price').asc()`|
 ||desc()|Sort by decreasing|`api.pages.orderBy('price').desc()`|
 ||forParentPage(number)|Get pages only for the parent page|`api.pages.forParentPage(114)`|
+|Settings|Storefron information|`api.settings`|
+||`get()`|Get settings for the store|`api.settings.get()`|
+|testimonials||Testimonials|`api.testimonials`|
+||`forProduct(number)`|Get testimonials for a product|`api.testimonials.forProduct(101).get()`|
+||`forCategory(number)`|Get testimonials for a category|`api.testimonials.forCategory(101).get()`|
+||`forArticle(number)`|Get testimonials for an article|`api.testimonials.forArticle(101).get()`|
+||`forOrder(number)`|Get testimonials for an order|`api.testimonials.forOrder(101).get()`|
+||`forStorefront(number)`|Get testimonials for a storefront|`api.testimonials.forStorefront(101).get()`|
+||`forVendor(number)`|Get testimonials for a vendor|`api.testimonials.forVendor(101).get()`|
 ### Examples
 ```javascript
 // Get all products

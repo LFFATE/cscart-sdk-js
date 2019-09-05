@@ -8,6 +8,7 @@ export default class CartContentRequest extends AbstractRequest {
     withShippings(ids?: Array<number>): this;
     protected buildUrl(): string;
     add(products: IAddToCartProduct | Array<IAddToCartProduct>): void;
+    update(product: any): void;
     saveUserData(userData: any): void;
     protected setParams(): void;
 }

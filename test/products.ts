@@ -49,6 +49,23 @@ describe('products', function() {
     expect(result.data).to.have.property('products')
   })
 
+  it('Search products', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_products/')
+      .query({
+        language:   'en',
+        sl:         'en',
+        lang_code:  'en',
+        q: 'shirt',
+      })
+      .reply(200)
+
+    api.setLanguage('en')
+
+    const result = await api.products.search('shirt').get();
+    assert.equal(result.status, '200')
+  })
+
   it('Limit and paginate products', async function() {
     nock('https://cscart-sdk.com')
       .get('/api/4.0/sra_products/')
@@ -72,6 +89,39 @@ describe('products', function() {
       .reply(200, {filtered: true})
 
     const result = await api.products.forCategory(113).get();
+
+    assert.equal(result.status, '200')
+    expect(result.data).to.have.property('filtered')
+  })
+
+  it('Get products by category with filters', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_products/')
+      .query({
+        filter: 'Y',
+        get_filters: true,
+        cid: 113
+      })
+      .reply(200, {filtered: true})
+
+    const result = await api.products.forCategory(113).withFilters().get();
+
+    assert.equal(result.status, '200')
+    expect(result.data).to.have.property('filtered')
+  })
+
+  it('Get products by category with applied filters', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_products/')
+      .query({
+        filter: 'Y',
+        get_filters: true,
+        features_hash: '1-11_2-21-22-23_3-100-500_4-42-300-USD',
+        cid: 113
+      })
+      .reply(200, {filtered: true})
+
+    const result = await api.products.forCategory(113).withFilters('1-11_2-21-22-23_3-100-500_4-42-300-USD').get();
 
     assert.equal(result.status, '200')
     expect(result.data).to.have.property('filtered')

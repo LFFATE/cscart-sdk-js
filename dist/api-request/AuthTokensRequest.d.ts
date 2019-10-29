@@ -6,4 +6,5 @@ export default class AuthRequest extends AbstractRequest {
     prefix: string;
     constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
     login(email: string, password: string): any;
+    socialLogin(provider: string, idToken: string, clientId: string): any;
 }

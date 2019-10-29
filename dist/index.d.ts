@@ -16,6 +16,7 @@ declare class CsCartApiSdk {
     readonly profile: any;
     readonly settings: any;
     readonly testimonials: any;
+    readonly vendors: any;
     private getNewApiRequest;
     getConfig(): IConfig;
     getClient(): AxiosInstance;

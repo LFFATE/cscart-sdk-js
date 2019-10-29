@@ -28,12 +28,25 @@ describe('auth_tokens', function() {
     assert.equal(result.status, '201')
   })
 
-  it('Login failure', async function() {
-      const result = await api.auth
-        .login('cscart@email.com', 'invalid-password')
-        .catch((error: any) => error.response);
+  it('Social login request', async function() {
+    nock('https://cscart-sdk.com')
+      .post('/api/4.0/sra_social_auth/',
+      {
+        provider: 'google',
+        token_id: 'ffdflasrovmd3123asd',
+        client_id: '130904857tRQwf',
+      })
+      .reply(200)
 
-        assert.equal(result.status, '404')
+    const result = await api.auth.socialLogin('google', 'ffdflasrovmd3123asd', '130904857tRQwf');
+    assert.equal(result.status, '200')
   })
 
+  it('Login failure', async function() {
+    const result = await api.auth
+      .login('cscart@email.com', 'invalid-password')
+      .catch((error: any) => error.response);
+
+      assert.equal(result.status, '404')
+  })
 });

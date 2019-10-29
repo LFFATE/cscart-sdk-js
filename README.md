@@ -51,6 +51,7 @@ const api = new CsCartApiSdk({
 ||asc()|Sort by increasing|`api.products.orderBy('price').asc()`|
 ||desc()|Sort by decreasing|`api.products.orderBy('price').desc()`|
 ||forCategory(number)|Get products only for the category|`api.products.forCategory(114)`|
+||withFilters()|Adds to response filters array|`api.products.withFilters()`|
 ||forOptions([{ optionId: number, value: any }])|Get product with selected options|`api.products.forOptions([{ optionId: 17, value: 7 }])`|
 |layouts||Layouts and blocks|`api.layouts`|
 ||get()|get layouts list|`api.layouts.get()`|
@@ -62,6 +63,7 @@ const api = new CsCartApiSdk({
 ||one(number)|get single category|`api.categories.one(50)`|
 |auth||Auth tokens|`api.auth`|
 ||login(email: string, password: string)|Try to login with email and password|`api.auth.login('user@email.com', 'password').then((response: any) => console.log(response.token))`|
+||socialLogin(provider: 'google', tokenId: string, clientId: string)|Verify auth for social|`api.auth.socialLogin('google', 'avfgjgjnf...', '10948fhrDs1').then((response: any) => console.log(response.token))`|
 |cart||Cart|`api.cart`|
 ||get()|Get cart content|`api.cart.get()`|
 ||withShippings(ids?: Array\<number\>)|response will contains shippings info. Ids - chosen_shipping|`api.cart.withShippings([4, 5]).get()`|
@@ -84,7 +86,7 @@ const api = new CsCartApiSdk({
 |pages||Pages|`api.pages`|
 ||get()|get pages list|`api.pages.get()`|
 ||one(number)|get single page by id|`api.pages.one(1).get()`|
-||limit(number)|Limit products count on request result| `api.pages.limit(50).get()`|
+||limit(number)|Limit pages count on request result| `api.pages.limit(50).get()`|
 ||orderBy(string)|Sort pages by |`api.pages.orderBy('product')`|
 ||asc()|Sort by increasing|`api.pages.orderBy('price').asc()`|
 ||desc()|Sort by decreasing|`api.pages.orderBy('price').desc()`|
@@ -98,6 +100,13 @@ const api = new CsCartApiSdk({
 ||`forOrder(number)`|Get testimonials for an order|`api.testimonials.forOrder(101).get()`|
 ||`forStorefront(number)`|Get testimonials for a storefront|`api.testimonials.forStorefront(101).get()`|
 ||`forVendor(number)`|Get testimonials for a vendor|`api.testimonials.forVendor(101).get()`|
+|vendors||Vendors|`api.vendors`|
+||get()|get vendors list|`api.vendors.get()`|
+||one(number)|get single vendor by id|`api.vendors.one(1).get()`|
+||limit(number)|Limit vendors count on request result| `api.vendors.limit(50).get()`|
+||orderBy(string)|Sort vendors by |`api.vendors.orderBy('name')`|
+||asc()|Sort by increasing|`api.vendors.orderBy('name').asc()`|
+||desc()|Sort by decreasing|`api.vendors.orderBy('name').desc()`|
 ### Examples
 ```javascript
 // Get all products

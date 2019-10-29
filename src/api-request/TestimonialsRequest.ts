@@ -3,7 +3,7 @@ import { IApiRequestConfig } from './IApiRequestConfig'
 import { IConfig } from '../config/IConfig'
 import AbstractRequest from './AbstractRequest'
 
-export default class PagesRequest extends AbstractRequest {
+export default class TestimonialsRequest extends AbstractRequest {
   entityPath: string = 'discussion';
   prefix: string = 'sra_'
 
@@ -47,9 +47,25 @@ export default class PagesRequest extends AbstractRequest {
     return this
   }
 
-  protected forItem(objectId: number, objectType: 'P'|'C'|'A'|'O'|'E'|'M') {
+  protected forItem(objectId: number, objectType: IObjectType) {
     this.params.object_id = objectId;
     this.params.object_type = objectType;
+  }
+
+  create(
+    object_id: number,
+    object_type: IObjectType,
+    name: string,
+    rating_value?: number,
+    message?: string
+  ) {
+    return this.post({
+      object_id,
+      object_type,
+      name,
+      rating_value,
+      message,
+    })
   }
 
   protected setParams(): void {
@@ -58,6 +74,15 @@ export default class PagesRequest extends AbstractRequest {
       language:   this.config.language,
       sl:         this.config.language,
       lang_code:  this.config.language,
+      params: {
+        page: this.params.page,
+        items_per_page: this.params.items_per_page,
+      }
     }
+
+    delete this.params.page
+    delete this.params.items_per_page
   }
 }
+
+type IObjectType = 'P'|'C'|'A'|'O'|'E'|'M'

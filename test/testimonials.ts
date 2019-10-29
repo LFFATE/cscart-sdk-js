@@ -27,17 +27,37 @@ describe('testimonials', function() {
     assert.equal(result.status, '200')
   })
 
-  // it('Get products by category', async function() {
-  //   nock('https://cscart-sdk.com')
-  //     .get('/api/4.0/sra_testimonials/1/')
-  //     .query({
-  //       get_subtestimonials: 'Y'
-  //     })
-  //     .reply(200, {subtestimonials: []})
+  it('Get for product with search', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_discussion/')
+      .query({
+        object_id: 101,
+        object_type: 'P',
+        params: {
+          items_per_page: 10,
+          page: 2
+        }
+      })
+      .reply(200)
 
-  //   const result = await api.testimonials.one(1).withSubtestimonials().get();
+    const result = await api.testimonials.forProduct(101).limit(10).page(2).get();
 
-  //   assert.equal(result.status, '200')
-  //   expect(result.data).to.have.property('subtestimonials')
-  // })
+    assert.equal(result.status, '200')
+  })
+
+  it('Create testimonial with data', async function() {
+    nock('https://cscart-sdk.com')
+      .post(/^\/api\/4.0\/sra_discussion\//,  {
+        object_id: 10,
+        object_type: 'P',
+        name: 'Guest',
+        rating_value: 4,
+        message: 'My message'
+      })
+      .reply(201)
+
+    const result = await api.testimonials.create(10, 'P', 'Guest', 4, 'My message');
+
+    assert.equal(result.status, '201')
+  })
 });

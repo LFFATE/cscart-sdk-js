@@ -3,8 +3,8 @@ import { IApiRequestConfig } from './IApiRequestConfig'
 import { IConfig } from '../config/IConfig'
 import AbstractRequest from './AbstractRequest'
 
-export default class ProductsRequest extends AbstractRequest {
-  entityPath: string = 'products';
+export default class VendorsRequest extends AbstractRequest {
+  entityPath: string = 'vendors';
   prefix: string = 'sra_'
 
   constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig) {
@@ -16,32 +16,6 @@ export default class ProductsRequest extends AbstractRequest {
     url = url + (this.handlerParams.id ? `${this.handlerParams.id}/` : '');
 
     return url
-  }
-
-  public forOptions(options: Array<selectedOption>) {
-    let selected_options: any = {};
-
-    options.forEach(option =>
-      selected_options[option.optionId] = option.value
-    );
-
-    this.params.selected_options = selected_options
-
-    return this
-  }
-
-  public forCategory(categoryId: number) {
-    this.params.filter    = 'Y';
-    this.params.cid       = categoryId;
-
-    return this
-  }
-
-  protected withFilters(appliedFiltersHash?: string) {
-    this.params.get_filters   = true;
-    this.params.features_hash = appliedFiltersHash;
-
-    return this
   }
 
   protected setParams(): void {
@@ -64,9 +38,4 @@ export default class ProductsRequest extends AbstractRequest {
       this.params.q = this.handlerParams.search;
     }
   }
-}
-
-interface selectedOption {
-  optionId: number;
-  value: any;
 }

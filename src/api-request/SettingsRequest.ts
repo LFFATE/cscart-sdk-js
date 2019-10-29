@@ -4,7 +4,7 @@ import { IConfig } from '../config/IConfig'
 import AbstractRequest from './AbstractRequest'
 
 export default class SettingsRequest extends AbstractRequest {
-  entityPath: string = 'storefront_information'
+  entityPath: string = 'storefront'
   prefix: string = 'sra_'
 
   constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig) {

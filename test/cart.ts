@@ -108,8 +108,18 @@ describe('cart', function() {
     assert.equal(result.status, '201')
   })
 
-  it('Remove from cart', async function() {
+  it('should remove a product from the cart', async function() {
     const result = await api.cart.one(145642).delete();
+
+    assert.equal(result.status, '204')
+  })
+
+  it('should clear cart', async function() {
+    nock('https://cscart-sdk.com')
+      .delete(/^\/api\/4.0\/sra_cart_content\//)
+      .reply(204)
+
+    const result = await api.cart.delete();
 
     assert.equal(result.status, '204')
   })

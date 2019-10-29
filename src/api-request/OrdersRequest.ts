@@ -21,6 +21,15 @@ export default class OrdersRequest extends AbstractRequest {
     return url
   }
 
+  public get() {
+    this.params = {
+      ...this.params,
+      get_orders_data: true,
+    }
+
+    return super.get()
+  }
+
   public create(order: INewOrder) {
     let productsObject = {};
 

@@ -20,7 +20,7 @@ describe('settings', function() {
 
   it('Get settings', async function() {
     nock('https://cscart-sdk.com')
-      .get(/^\/api\/4.0\/sra_storefront_information\//)
+      .get(/^\/api\/4.0\/sra_storefront\//)
       .reply(200)
 
     const result = await api.settings.get();

@@ -9,13 +9,14 @@ declare class ApiRequest {
     constructor(params: IApiRequestConfig, config: IConfig);
     limit(limit: number): this;
     page(page: number): this;
-    byCompany(companyId: number): void;
-    withProducts(): void;
+    byCompany(companyId: number): this;
+    withProducts(): this;
     one(id: number | string): this;
+    search(query: string): this;
     asc(): this;
     desc(): this;
     orderBy(orderBy: string): this;
     setIconSize(size: [number, number]): this;
-    private checkMethodAllowed;
+    private isMethodAllowed;
 }
 export default ApiRequest;

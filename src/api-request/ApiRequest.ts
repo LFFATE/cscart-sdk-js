@@ -44,7 +44,7 @@ class ApiRequest {
   }
 
   public byCompany(companyId: number) {
-    if (this.checkMethodAllowed(['products'])) {
+    if (!this.isMethodAllowed(['products'])) {
       throw new Error(`Can\'t get company for ${this.entity} entity`);
     }
 
@@ -52,16 +52,24 @@ class ApiRequest {
       ...this.params,
       company_id: companyId,
     }
+    return this
   }
 
   public withProducts() {
-    if (this.checkMethodAllowed(['categories'])) {
+    if (!this.isMethodAllowed(['categories'])) {
       throw new Error(`Can\'t get company for ${this.entity} entity`);
     }
+    return this
   }
 
   public one(id: number|string) {
     this.handlerParams.id = id
+
+    return this
+  }
+
+  public search(query: string) {
+    this.handlerParams.search = query;
 
     return this
   }
@@ -95,7 +103,7 @@ class ApiRequest {
     return this
   }
 
-  private checkMethodAllowed(allowed: Array<string>): boolean {
+  private isMethodAllowed(allowed: Array<string>): boolean {
     return allowed.indexOf(this.entity) !== -1;
   }
 }

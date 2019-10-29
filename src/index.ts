@@ -81,6 +81,10 @@ class CsCartApiSdk {
   get testimonials() {
     return this.getNewApiRequest('testimonials')
   }
+
+  get vendors() {
+    return this.getNewApiRequest('vendors')
+  }
   //---
 
   private getNewApiRequest(type: string) {

@@ -18,6 +18,18 @@ describe('orders', function() {
       });
   });
 
+  it('should request orders with data', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_orders/')
+      .query({
+        get_orders_data:   true,
+      })
+      .reply(200)
+
+    const result = await api.orders.get();
+    assert.equal(result.status, '200')
+  })
+
   it('Create order', async function() {
     nock('https://cscart-sdk.com')
       .post(/^\/api\/4.0\/sra_orders\//,  {

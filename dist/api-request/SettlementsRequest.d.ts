@@ -5,6 +5,9 @@ export default class SettlementsRequest extends AbstractRequest {
     entityPath: string;
     prefix: string;
     constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
+    protected buildUrl(): string;
+    getForm(orderId: number): any;
+    hookUrl(url: string): any;
     create(data: INewSettlement): any;
     protected setParams(): void;
 }

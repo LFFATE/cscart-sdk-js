@@ -6,5 +6,7 @@ export default class VendorsRequest extends AbstractRequest {
     prefix: string;
     constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
     protected buildUrl(): string;
+    getForm(): any;
+    create(data: any): any;
     protected setParams(): void;
 }

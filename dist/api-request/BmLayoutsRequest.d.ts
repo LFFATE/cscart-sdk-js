@@ -6,6 +6,7 @@ export default class BmLayoutsRequest extends AbstractRequest {
     prefix: string;
     constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
     withBlocks(): this;
+    withSlug(slug: string | number): this;
     forLocation(location: string): this;
     protected buildUrl(): string;
     protected setParams(): void;

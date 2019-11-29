@@ -32,4 +32,24 @@ describe('settlements', function() {
 
     assert.equal(result.status, '201')
   })
+
+  it('get payment form', async function() {
+    nock('https://cscart-sdk.com')
+      .get(/^\/api\/4.0\/sra_order_payment\/10/)
+      .reply(200)
+
+    const result = await api.settlements.getForm(10);
+
+    assert.equal(result.status, '200')
+  })
+
+  it('hook url', async function() {
+    nock('https://backend.com/')
+      .get('/requesting-hook-url')
+      .reply(200)
+
+    const result = await api.settlements.hookUrl('https://backend.com/requesting-hook-url');
+
+    assert.equal(result.status, '200')
+  })
 });

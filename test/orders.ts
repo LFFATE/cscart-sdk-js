@@ -97,4 +97,31 @@ describe('orders', function() {
 
     assert.equal(result.status, '201')
   })
+
+  it('should request orders with sorting by date asc', async () => {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_orders/')
+      .query({
+        get_orders_data:   true,
+        sort_by: 'date',
+        sort_order: 'asc'
+      })
+      .reply(200)
+
+    const result = await api.orders.orderBy('date').asc().get();
+    assert.equal(result.status, '200')
+  })
+  it('should request orders with sorting by date desc', async () => {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_orders/')
+      .query({
+        get_orders_data:   true,
+        sort_by: 'date',
+        sort_order: 'desc'
+      })
+      .reply(200)
+
+    const result = await api.orders.orderBy('date').desc().get();
+    assert.equal(result.status, '200')
+  })
 });

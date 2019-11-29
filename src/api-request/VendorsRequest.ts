@@ -2,6 +2,7 @@ import { IApiRequestConfig } from './IApiRequestConfig'
 
 import { IConfig } from '../config/IConfig'
 import AbstractRequest from './AbstractRequest'
+import { stringify } from 'querystring';
 
 export default class VendorsRequest extends AbstractRequest {
   entityPath: string = 'vendors';
@@ -16,6 +17,33 @@ export default class VendorsRequest extends AbstractRequest {
     url = url + (this.handlerParams.id ? `${this.handlerParams.id}/` : '');
 
     return url
+  }
+
+  getForm() {
+    this.entityPath       = 'vendor_registration';
+    this.setParams()
+
+    return this.client.get(
+      super.buildUrl(),
+      {
+        params: {
+          ...this.params
+        },
+        paramsSerializer: (params: any) => {
+          return stringify(params)
+        }
+      }
+    )
+  }
+
+  create(data: any) {
+    this.entityPath = 'vendor_registration';
+    this.setParams()
+
+    return this.client.post(
+      super.buildUrl(),
+      data
+    )
   }
 
   protected setParams(): void {

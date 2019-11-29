@@ -49,4 +49,36 @@ describe('vendors', function() {
 
     assert.equal(result.status, '200')
   })
+
+  it('Get form', async function() {
+    nock('https://cscart-sdk.com')
+      .get(/^\/api\/4.0\/sra_vendor_registration\//)
+      .reply(200)
+
+    const result = await api.vendors.getForm();
+
+    assert.equal(result.status, '200')
+  })
+
+  it('Create order', async function() {
+    nock('https://cscart-sdk.com')
+      .post(/^\/api\/4.0\/sra_vendor_registration\//,  {
+        company: "Test company",
+        plan_id: "1",
+        email: "test@example.com",
+        admin_firstname: "firstname",
+        admin_lastname: "lastname"
+      })
+      .reply(201)
+
+    const result = await api.vendors.create({
+      company: "Test company",
+      plan_id: "1",
+      email: "test@example.com",
+      admin_firstname: "firstname",
+      admin_lastname: "lastname"
+    });
+
+    assert.equal(result.status, '201')
+  })
 });

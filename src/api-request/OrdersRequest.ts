@@ -72,6 +72,14 @@ export default class OrdersRequest extends AbstractRequest {
       sl:         this.config.language,
       lang_code:  this.config.language,
     }
+
+    if (this.handlerParams.orderBy) {
+      this.params.sort_by = this.handlerParams.orderBy;
+    }
+
+    if (this.handlerParams.order) {
+      this.params.sort_order = this.handlerParams.order;
+    }
   }
 }
 

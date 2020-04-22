@@ -24,7 +24,7 @@ describe('profile', function() {
       .reply(200)
 
     const result = await api.profile.get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get profile register form', async function() {
@@ -37,7 +37,7 @@ describe('profile', function() {
       .reply(200)
 
     const result = await api.profile.form().forAddProfile().get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get profile update form', async function() {
@@ -50,7 +50,7 @@ describe('profile', function() {
       .reply(200)
 
     const result = await api.profile.form().forUpdateProfile().get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get checkout register form', async function() {
@@ -63,7 +63,7 @@ describe('profile', function() {
       .reply(200)
 
     const result = await api.profile.form().forAddOrder().get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get checkout update form', async function() {
@@ -76,42 +76,42 @@ describe('profile', function() {
       .reply(200)
 
     const result = await api.profile.form().forUpdateOrder().get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Create profile', async function() {
     nock('https://cscart-sdk.com')
       .post(/^\/api\/4.0\/sra_profile\//,  {
-        email: "cscart@demo.com",
-        password1: "12345",
-        password2: "12345"
+        email: 'cscart@demo.com',
+        password1: '12345',
+        password2: '12345'
       })
       .reply(201)
 
     const result = await api.profile.create({
-      email: "cscart@demo.com",
-      password1: "12345",
-      password2: "12345"
+      email: 'cscart@demo.com',
+      password1: '12345',
+      password2: '12345'
     });
 
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 
   it('Create profile', async function() {
     nock('https://cscart-sdk.com')
       .put(/^\/api\/4.0\/sra_profile\/1/,  {
-        email: "cscart@demo.com",
-        password1: "12345",
-        password2: "12345"
+        email: 'cscart@demo.com',
+        password1: '12345',
+        password2: '12345'
       })
       .reply(201)
 
     const result = await api.profile.update({
-      email: "cscart@demo.com",
-      password1: "12345",
-      password2: "12345"
+      email: 'cscart@demo.com',
+      password1: '12345',
+      password2: '12345'
     });
 
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 });

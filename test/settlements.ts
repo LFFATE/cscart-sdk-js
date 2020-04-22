@@ -30,7 +30,7 @@ describe('settlements', function() {
       orderId: 1908,
     });
 
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 
   it('get payment form', async function() {
@@ -40,7 +40,7 @@ describe('settlements', function() {
 
     const result = await api.settlements.getForm(10);
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('hook url', async function() {
@@ -50,6 +50,6 @@ describe('settlements', function() {
 
     const result = await api.settlements.hookUrl('https://backend.com/requesting-hook-url');
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 });

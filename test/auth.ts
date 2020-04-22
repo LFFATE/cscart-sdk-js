@@ -25,7 +25,7 @@ describe('auth_tokens', function() {
 
   it('Login success', async function() {
     const result = await api.auth.login('cscart@email.com', 'valid-password');
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 
   it('Social login request', async function() {
@@ -39,7 +39,7 @@ describe('auth_tokens', function() {
       .reply(200)
 
     const result = await api.auth.socialLogin('google', 'ffdflasrovmd3123asd', '130904857tRQwf');
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Login failure', async function() {
@@ -47,6 +47,6 @@ describe('auth_tokens', function() {
       .login('cscart@email.com', 'invalid-password')
       .catch((error: any) => error.response);
 
-      assert.equal(result.status, '404')
+      assert.equal(result.status, 404)
   })
 });

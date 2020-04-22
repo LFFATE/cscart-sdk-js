@@ -30,7 +30,7 @@ describe('products', function() {
       .reply(200, {product_id: []})
 
     const result = await api.products.one(505).forOptions([{ optionId: 7, value: 17 }]).get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get products', async function() {
@@ -65,7 +65,7 @@ describe('products', function() {
     api.setLanguage('en')
 
     const result = await api.products.search('shirt').get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Limit and paginate products', async function() {
@@ -92,7 +92,7 @@ describe('products', function() {
 
     const result = await api.products.forCategory(113).get();
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
     expect(result.data).to.have.property('filtered')
   })
 
@@ -108,7 +108,7 @@ describe('products', function() {
 
     const result = await api.products.forCategory(113).withFilters().get();
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
     expect(result.data).to.have.property('filtered')
   })
 
@@ -125,7 +125,7 @@ describe('products', function() {
 
     const result = await api.products.forCategory(113).withFilters('1-11_2-21-22-23_3-100-500_4-42-300-USD').get();
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
     expect(result.data).to.have.property('filtered')
   })
 });

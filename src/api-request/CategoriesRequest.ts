@@ -1,14 +1,18 @@
-import { IApiRequestConfig } from './IApiRequestConfig'
+import { AxiosInstance } from 'axios'
 
-import { IConfig } from '../config/IConfig'
+import Config from '../config/Config'
 import AbstractRequest from './AbstractRequest'
 
 export default class CategoriesRequest extends AbstractRequest {
   entityPath: string = 'categories';
   prefix: string = 'sra_'
+  handlerParams: any;
+  params: any;
 
-  constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig) {
-    super(handlerParams, params, config)
+  constructor(client: AxiosInstance, config: Config) {
+    super(client, config)
+    this.handlerParams = {};
+    this.params = {};
   }
 
   protected buildUrl(): string {

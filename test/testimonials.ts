@@ -24,7 +24,7 @@ describe('testimonials', function() {
 
     const result = await api.testimonials.forProduct(101).get();
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get for article', async function() {
@@ -35,7 +35,7 @@ describe('testimonials', function() {
 
     const result = await api.testimonials.forArticle(101).get();
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get for product with search', async function() {
@@ -53,7 +53,7 @@ describe('testimonials', function() {
 
     const result = await api.testimonials.forProduct(101).limit(10).page(2).get();
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Create testimonial with data', async function() {
@@ -69,6 +69,6 @@ describe('testimonials', function() {
 
     const result = await api.testimonials.create(10, 'P', 'Guest', 4, 'My message');
 
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 });

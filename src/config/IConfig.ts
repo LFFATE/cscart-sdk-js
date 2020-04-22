@@ -1,11 +1,13 @@
-export interface IConfig {
+interface IConfig {
   username: string;
-  apiKey: string;
-  apiUrl: string;
-  siteUrl: string;
-  client?: string;
+  apiKey:   string;
+  apiUrl:   string;
+  siteUrl:  string;
+  client?:  string;
 
-  timeout?: number;
-  language?: string;
+  timeout?:   number;
+  language?:  string;
   userToken?: string;
 }
+
+export default IConfig

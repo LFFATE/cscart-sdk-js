@@ -1,14 +1,17 @@
-import { IApiRequestConfig } from './IApiRequestConfig'
-
-import { IConfig } from '../config/IConfig'
+import Config from '../config/Config'
 import AbstractRequest from './AbstractRequest'
+import { AxiosInstance } from 'axios';
 
-export default class AuthRequest extends AbstractRequest {
-  entityPath: string = 'auth_tokens';
-  prefix: string = '';
+class AuthRequest extends AbstractRequest {
+  entityPath: string  = 'auth_tokens';
+  prefix: string      = '';
+  handlerParams: any;
+  params: any;
 
-  constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig) {
-    super(handlerParams, params, config)
+  constructor(client: AxiosInstance, config: Config) {
+    super(client, config)
+    this.handlerParams = {};
+    this.params = {};
   }
 
   public login(email: string, password: string) {
@@ -33,3 +36,5 @@ export default class AuthRequest extends AbstractRequest {
     return request
   }
 }
+
+export default AuthRequest

@@ -57,7 +57,7 @@ describe('wishlist', function() {
 
   it('Get wishlist', async function() {
     const result = await api.wishlist.get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Add to wishlist', async function() {
@@ -65,13 +65,13 @@ describe('wishlist', function() {
       product_id: 4,
     });
 
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 
   it('Remove from wishlist', async function() {
     const result = await api.wishlist.one(192).remove();
 
-    assert.equal(result.status, '204')
+    assert.equal(result.status, 204)
   })
 
   it('Batch add to wishlist', async function() {
@@ -87,6 +87,6 @@ describe('wishlist', function() {
       },
     ]);
 
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 });

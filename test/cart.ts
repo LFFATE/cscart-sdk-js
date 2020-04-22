@@ -58,12 +58,12 @@ describe('cart', function() {
 
   it('Get cart', async function() {
     const result = await api.cart.get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get cart with shippings', async function() {
     const result = await api.cart.withShippings().get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get cart with selected shippings', async function() {
@@ -76,7 +76,7 @@ describe('cart', function() {
       .reply(200)
 
     const result = await api.cart.withShippings([1]).get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Add to cart', async function() {
@@ -85,7 +85,7 @@ describe('cart', function() {
       amount: 1,
     });
 
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 
   it('Update product at cart', async function() {
@@ -101,7 +101,7 @@ describe('cart', function() {
       amount: 3,
     });
 
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 
   it('should remove a product from the cart', async function() {
@@ -112,7 +112,7 @@ describe('cart', function() {
     api.setClientId('sd_spa')
     const result = await api.cart.one(145642).delete();
 
-    assert.equal(result.status, '204')
+    assert.equal(result.status, 204)
   })
 
   it('should clear cart', async function() {
@@ -122,7 +122,7 @@ describe('cart', function() {
 
     const result = await api.cart.delete();
 
-    assert.equal(result.status, '204')
+    assert.equal(result.status, 204)
   })
 
   it('Batch add to cart', async function() {
@@ -141,7 +141,7 @@ describe('cart', function() {
       },
     ]);
 
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 
   it('Save user data', async function() {
@@ -159,6 +159,6 @@ describe('cart', function() {
       email: 'new-email@example.com'
     });
 
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 });

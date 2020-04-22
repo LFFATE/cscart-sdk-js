@@ -2,9 +2,6 @@ import 'mocha'
 import nock from 'nock'
 import CsCartApiSdk from '../src/index'
 import { assert, expect } from 'chai'
-import { endsWith } from 'lodash'
-
-// import * as productsMock from './mock/products.json'
 
 describe('categories', function() {
   let api: CsCartApiSdk;
@@ -26,7 +23,7 @@ describe('categories', function() {
 
     const result = await api.categories.one(505).get();
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
     expect(result.data).to.have.property('category_id')
   })
 
@@ -41,7 +38,7 @@ describe('categories', function() {
 
     const result = await api.categories.one(1).withSubcategories().get();
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
     expect(result.data).to.have.property('subcategories')
   })
 });

@@ -1,15 +1,19 @@
-import { IApiRequestConfig } from './IApiRequestConfig'
+import { AxiosInstance } from 'axios'
+import { stringify } from 'querystring'
 
-import { IConfig } from '../config/IConfig'
+import Config from '../config/Config'
 import AbstractRequest from './AbstractRequest'
-import { stringify } from 'querystring';
 
 export default class VendorsRequest extends AbstractRequest {
-  entityPath: string = 'vendors';
-  prefix: string = 'sra_'
+  entityPath:     string = 'vendors';
+  prefix:         string = 'sra_'
+  handlerParams:  any;
+  params: any;
 
-  constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig) {
-    super(handlerParams, params, config)
+  constructor(client: AxiosInstance, config: Config) {
+    super(client, config)
+    this.handlerParams = {};
+    this.params = {};
   }
 
   protected buildUrl(): string {

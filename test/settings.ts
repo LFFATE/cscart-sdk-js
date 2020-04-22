@@ -24,6 +24,6 @@ describe('settings', function() {
       .reply(200)
 
     const result = await api.settings.get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 });

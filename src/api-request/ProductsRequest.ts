@@ -1,14 +1,17 @@
-import { IApiRequestConfig } from './IApiRequestConfig'
-
-import { IConfig } from '../config/IConfig'
+import { AxiosInstance } from 'axios'
+import Config from '../config/Config'
 import AbstractRequest from './AbstractRequest'
 
 export default class ProductsRequest extends AbstractRequest {
   entityPath: string = 'products';
   prefix: string = 'sra_'
+  handlerParams: any;
+  params: any;
 
-  constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig) {
-    super(handlerParams, params, config)
+  constructor(client: AxiosInstance, config: Config) {
+    super(client, config)
+    this.handlerParams = {};
+    this.params = {};
   }
 
   protected buildUrl(): string {
@@ -37,14 +40,14 @@ export default class ProductsRequest extends AbstractRequest {
     return this
   }
 
-  protected withFilters(appliedFiltersHash?: string) {
+  withFilters(appliedFiltersHash?: string) {
     this.params.get_filters   = true;
     this.params.features_hash = appliedFiltersHash;
 
     return this
   }
 
-  protected setParams(): void {
+  setParams(): void {
     this.params = {
       ...this.params,
       language:   this.config.language,

@@ -1,17 +1,20 @@
+import { AxiosInstance } from 'axios'
 import forOwn from 'lodash/forOwn'
 import snakeCase from 'lodash/snakeCase'
 
-import { IApiRequestConfig } from './IApiRequestConfig'
-
-import { IConfig } from '../config/IConfig'
+import Config from '../config/Config'
 import AbstractRequest from './AbstractRequest'
 
 export default class OrdersRequest extends AbstractRequest {
   entityPath: string = 'orders';
   prefix: string = 'sra_'
+  handlerParams: any;
+  params: any;
 
-  constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig) {
-    super(handlerParams, params, config)
+  constructor(client: AxiosInstance, config: Config) {
+    super(client, config)
+    this.handlerParams = {};
+    this.params = {};
   }
 
   protected buildUrl(): string {
@@ -89,7 +92,7 @@ interface INewOrder {
   shippingIds: Array<number>;
   paymentId: number;
   userData?: any;
-  paymentInfo: any;
+  paymentInfo?: any;
 
   [others: string]: any;
 }

@@ -2,7 +2,6 @@ import 'mocha'
 import nock from 'nock'
 import CsCartApiSdk from '../src/index'
 import { assert } from 'chai'
-import { startsWith } from 'lodash'
 
 describe('layouts', function() {
   let api: CsCartApiSdk;
@@ -25,7 +24,7 @@ describe('layouts', function() {
       .reply(200)
 
     const result = await api.layouts.get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('should get single layout', async () => {
@@ -34,7 +33,7 @@ describe('layouts', function() {
       .reply(200)
 
     const result = await api.layouts.one('spalayout').get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('should get location', async () => {
@@ -43,7 +42,7 @@ describe('layouts', function() {
       .reply(200)
 
     const result = await api.layouts.one('spalayout').forLocation('index.index').get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('should get blocks location', async () => {
@@ -52,7 +51,7 @@ describe('layouts', function() {
       .reply(200)
 
     const result = await api.layouts.one('spalayout').forLocation('index.index').withBlocks().get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('should get blocks for location with slug', async () => {
@@ -61,6 +60,6 @@ describe('layouts', function() {
       .reply(200)
 
     const result = await api.layouts.one('spalayout').forLocation('products.view').withBlocks().withSlug('100g-pants').get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 });

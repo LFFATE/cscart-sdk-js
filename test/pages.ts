@@ -1,7 +1,7 @@
 import 'mocha'
 import nock from 'nock'
 import CsCartApiSdk from '../src/index'
-import { assert, expect } from 'chai'
+import { assert, } from 'chai'
 
 
 describe('pages', function() {
@@ -22,7 +22,7 @@ describe('pages', function() {
       .reply(200)
 
     const result = await api.pages.one(1).get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get pages', async function() {
@@ -31,7 +31,7 @@ describe('pages', function() {
       .reply(200)
 
     const result = await api.pages.get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get pages by parent', async function() {
@@ -48,7 +48,7 @@ describe('pages', function() {
     api.setLanguage('en')
 
     const result = await api.pages.forParentPage(1).get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get pages by parent with sort', async function() {
@@ -66,7 +66,7 @@ describe('pages', function() {
     api.setLanguage('en')
 
     const result = await api.pages.forParentPage(1).orderBy('name').get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
 });

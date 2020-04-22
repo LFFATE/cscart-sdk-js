@@ -1,7 +1,7 @@
 import 'mocha'
 import nock from 'nock'
 import CsCartApiSdk from '../src/index'
-import { assert, expect } from 'chai'
+import { assert, } from 'chai'
 
 
 describe('notificatons', function() {
@@ -22,7 +22,7 @@ describe('notificatons', function() {
       .reply(200)
 
     const result = await api.notifications.get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('should mark notifications as viewed', async function() {
@@ -34,6 +34,6 @@ describe('notificatons', function() {
       .reply(200)
 
     const result = await api.notifications.markAsViewed('2020-01-22 16:16:23');
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 });

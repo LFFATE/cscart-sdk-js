@@ -23,7 +23,7 @@ describe('vendors', function() {
 
     const result = await api.vendors.get();
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get list with search', async function() {
@@ -37,7 +37,7 @@ describe('vendors', function() {
 
     const result = await api.vendors.limit(10).page(2).get();
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get single vendor', async function() {
@@ -47,7 +47,7 @@ describe('vendors', function() {
 
     const result = await api.vendors.one(200).get();
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Get form', async function() {
@@ -57,7 +57,7 @@ describe('vendors', function() {
 
     const result = await api.vendors.getForm();
 
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Create order', async function() {
@@ -79,6 +79,6 @@ describe('vendors', function() {
       admin_lastname: "lastname"
     });
 
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 });

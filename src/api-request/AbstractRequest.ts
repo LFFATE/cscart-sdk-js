@@ -1,21 +1,20 @@
 import { stringify } from 'qs'
+import { AxiosInstance } from 'axios'
 
-import { IConfig } from '../config/IConfig'
-import { IApiRequestConfig } from './IApiRequestConfig'
+import Config from '../config/Config'
 
 export default abstract class AbstractRequest {
-  abstract entityPath: string;
-  abstract prefix: string;
-  protected requestUrl: string;
-  protected client: any;
-  protected handlerParams: any;
-  protected params: any;
-  protected config: IConfig;
+  abstract entityPath:      string;
+  abstract prefix:          string;
+  protected requestUrl:     string;
+  protected config:         Config;
+  protected client:         AxiosInstance;
+  abstract handlerParams:  any;
+  abstract params:         any;
 
-  protected constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig) {
-    this.client         = params.client;
-    this.config         = config;
-    this.handlerParams  = handlerParams;
+  protected constructor(client: AxiosInstance, config: Config) {
+    this.config = config;
+    this.client = client;
   }
 
   protected buildUrl(): string {
@@ -25,7 +24,7 @@ export default abstract class AbstractRequest {
   protected setParams(): void {
   }
 
-  public get() {
+  get() {
     this.setParams()
 
     return this.client.get(
@@ -41,7 +40,7 @@ export default abstract class AbstractRequest {
     )
   }
 
-  public post(data: any = {}) {
+  post(data: any = {}) {
     this.setParams()
 
     return this.client.post(
@@ -58,7 +57,7 @@ export default abstract class AbstractRequest {
     )
   }
 
-  public put(data: any = {}) {
+  put(data: any = {}) {
     this.setParams()
 
     return this.client.put(
@@ -75,11 +74,93 @@ export default abstract class AbstractRequest {
     )
   }
 
-  public delete() {
+  delete() {
     this.setParams()
 
     return this.client.delete(
       this.buildUrl()
     )
+  }
+
+  limit(limit: number) {
+    this.params = {
+      ...this.params,
+      items_per_page: limit,
+    }
+
+    return this
+  }
+
+  page(page: number) {
+    this.params = {
+      ...this.params,
+      page: page,
+    }
+
+    return this
+  }
+
+  byCompany(companyId: number) {
+    if (!this.isMethodAllowed(['products'])) {
+      throw new Error(`Can\'t get company for ${this.entityPath} entity`);
+    }
+
+    this.params = {
+      ...this.params,
+      company_id: companyId,
+    }
+    return this
+  }
+
+  withProducts() {
+    if (!this.isMethodAllowed(['categories'])) {
+      throw new Error(`Can\'t get company for ${this.entityPath} entity`);
+    }
+    return this
+  }
+
+  one(id: number|string) {
+    this.handlerParams.id = id
+
+    return this
+  }
+
+  search(query: string) {
+    this.handlerParams.search = query;
+
+    return this
+  }
+
+  asc() {
+    this.handlerParams.order = 'asc';
+    return this
+  }
+
+  desc() {
+    this.handlerParams.order = 'desc';
+    return this
+  }
+
+  orderBy(orderBy: string) {
+    this.handlerParams.orderBy = orderBy;
+    return this
+  }
+
+  setIconSize(size: [number, number]) {
+    if (!this.params.icon_sizes) {
+      this.params.icon_sizes = {
+        main_pair: [],
+        image_pairs: []
+      };
+    }
+
+    this.params.icon_sizes.main_pair.push(size)
+    this.params.icon_sizes.image_pairs.push(size)
+
+    return this
+  }
+
+  private isMethodAllowed(allowed: Array<string>): boolean {
+    return allowed.indexOf(this.entityPath) !== -1;
   }
 }

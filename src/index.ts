@@ -1,15 +1,30 @@
-import { IConfig } from './config/IConfig'
 import axios from 'axios'
 import { Base64 } from 'js-base64'
 import { AxiosInstance } from 'axios'
-import ApiRequest from './api-request/ApiRequest'
+
+import Config from './config/Config'
+import IConfig from './config/IConfig'
+import AuthRequest from './api-request/AuthRequest'
+import CartContentRequest from './api-request/CartRequest'
+import CategoriesRequest from './api-request/CategoriesRequest'
+import LayoutsRequest from './api-request/LayoutsRequest'
+import ProductsRequest from './api-request/ProductsRequest'
+import PagesRequest from './api-request/PagesRequest'
+import OrdersRequest from './api-request/OrdersRequest'
+import SettlementsRequest from './api-request/SettlementsRequest'
+import WishlistRequest from './api-request/WishlistRequest'
+import ProfileRequest from './api-request/ProfileRequest'
+import SettingsRequest from './api-request/SettingsRequest'
+import TestimonialsRequest from './api-request/TestimonialsRequest'
+import VendorsRequest from './api-request/VendorsRequest'
+import NotificationRequest from './api-request/NotificationRequest'
 
 class CsCartApiSdk {
-  protected config: IConfig;
-  protected client: AxiosInstance; // todo adapter
+  protected config: Config;
+  protected client: AxiosInstance;
 
   constructor(config: IConfig) {
-    this.config = config;
+    this.config = new Config(config);
     this.client = axios.create({
       baseURL: this.config.apiUrl,
       timeout: this.config.timeout ? this.config.timeout : 8000,
@@ -19,95 +34,121 @@ class CsCartApiSdk {
       },
     });
 
-    this.client.interceptors.request.use((conf) => {
+    this.client.interceptors.request.use(conf => {
       const newConf = { ...conf };
 
       newConf.headers.common['Storefront-Api-Access-Key'] = this.config.apiKey;
       newConf.headers.common['Cache-Control'] = 'no-cache';
 
-      if (this.config.client) {
-        newConf.params = {
-          ...newConf.params,
-          client: this.config.client,
-        }
+      newConf.params = {
+        ...newConf.params,
+        client: this.config.client,
       }
 
       if (this.config.userToken) {
         newConf.headers.common.Authorization = `Basic ${Base64.encode(this.config.userToken)}:`;
       }
 
-      return newConf;
+      return newConf
     });
   }
 
-  // Rests
   get products() {
-    return this.getNewApiRequest('products')
+    return new ProductsRequest(
+      this.client,
+      this.config
+    )
   }
 
   get pages() {
-    return this.getNewApiRequest('pages')
+    return new PagesRequest(
+      this.client,
+      this.config
+    )
   }
 
   get categories() {
-    return this.getNewApiRequest('categories')
+    return new CategoriesRequest(
+      this.client,
+      this.config
+    )
   }
 
   get auth() {
-    return this.getNewApiRequest('auth_tokens')
+    return new AuthRequest(
+      this.client,
+      this.config
+    )
   }
 
   get layouts() {
-    return this.getNewApiRequest('bm_layouts')
+    return new LayoutsRequest(
+      this.client,
+      this.config
+    )
   }
 
   get orders() {
-    return this.getNewApiRequest('orders')
+    return new OrdersRequest(
+      this.client,
+      this.config
+    )
   }
 
   get settlements() {
-    return this.getNewApiRequest('settlements')
+    return new SettlementsRequest(
+      this.client,
+      this.config
+    )
   }
 
   get cart() {
-    return this.getNewApiRequest('cart_content')
+    return new CartContentRequest(
+      this.client,
+      this.config
+    )
   }
 
   get wishlist() {
-    return this.getNewApiRequest('wishlist')
+    return new WishlistRequest(
+      this.client,
+      this.config
+    )
   }
 
   get profile() {
-    return this.getNewApiRequest('profile')
+    return new ProfileRequest(
+      this.client,
+      this.config
+    )
   }
 
   get settings() {
-    return this.getNewApiRequest('settings')
+    return new SettingsRequest(
+      this.client,
+      this.config
+    )
   }
 
   get testimonials() {
-    return this.getNewApiRequest('testimonials')
+    return new TestimonialsRequest(
+      this.client,
+      this.config
+    )
   }
 
   get vendors() {
-    return this.getNewApiRequest('vendors')
+    return new VendorsRequest(
+      this.client,
+      this.config
+    )
   }
 
   get notifications() {
-    return this.getNewApiRequest('notification')
-  }
-  //---
-
-  private getNewApiRequest(type: string) {
-    return new Proxy(
-      new ApiRequest({
-        entity: type,
-        client: this.client
-      },
-        this.config
-      ),
-      proxyResolver
-    );
+    return new NotificationRequest(
+      this.client,
+      this.config
+    )
   }
 
   public getConfig(): IConfig {
@@ -133,12 +174,5 @@ class CsCartApiSdk {
 
 declare let global: any
 global.CsCartApiSdk = CsCartApiSdk;
-
-const proxyResolver = {
-  get(target: any, name: string) {
-
-    return target[name] || target.handler[name] || undefined
-  },
-};
 
 export default CsCartApiSdk

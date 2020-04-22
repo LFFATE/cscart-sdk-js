@@ -28,7 +28,7 @@ describe('orders', function() {
       .reply(200)
 
     const result = await api.orders.get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 
   it('Create order', async function() {
@@ -56,7 +56,7 @@ describe('orders', function() {
       paymentId: 1,
     });
 
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 
   it('Create order with data', async function() {
@@ -96,7 +96,7 @@ describe('orders', function() {
       }
     });
 
-    assert.equal(result.status, '201')
+    assert.equal(result.status, 201)
   })
 
   it('should request orders with sorting by date asc', async () => {
@@ -111,7 +111,7 @@ describe('orders', function() {
       .reply(200)
 
     const result = await api.orders.orderBy('date').asc().get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
   it('should request orders with sorting by date desc', async () => {
     nock('https://cscart-sdk.com')
@@ -125,6 +125,6 @@ describe('orders', function() {
       .reply(200)
 
     const result = await api.orders.orderBy('date').desc().get();
-    assert.equal(result.status, '200')
+    assert.equal(result.status, 200)
   })
 });

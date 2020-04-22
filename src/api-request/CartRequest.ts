@@ -1,17 +1,21 @@
-import { IApiRequestConfig } from './IApiRequestConfig'
+import { AxiosInstance } from 'axios'
 
-import { IConfig } from '../config/IConfig'
+import Config from '../config/Config'
 import AbstractRequest from './AbstractRequest'
 
-export default class CartContentRequest extends AbstractRequest {
+class CartRequest extends AbstractRequest {
   entityPath: string = 'cart_content'
   prefix: string = 'sra_'
+  handlerParams: any;
+  params: any;
 
-  constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig) {
-    super(handlerParams, params, config)
+  constructor(client: AxiosInstance, config: Config) {
+    super(client, config)
+    this.handlerParams = {};
+    this.params = {};
   }
 
-  public withShippings(ids?: Array<number>) {
+  withShippings(ids?: Array<number>) {
     this.params = {
       ...this.params,
       calculate_shipping: 'A',
@@ -34,7 +38,7 @@ export default class CartContentRequest extends AbstractRequest {
     return url
   }
 
-  public add(products: IAddToCartProduct | Array<IAddToCartProduct>): void {
+  add(products: IAddToCartProduct | Array<IAddToCartProduct>) {
     let requestProducts: any = {};
 
     if (Array.isArray(products)) {
@@ -52,11 +56,11 @@ export default class CartContentRequest extends AbstractRequest {
     })
   }
 
-  public update(product: any): void {
+  update(product: any) {
     return this.put(product)
   }
 
-  public saveUserData(userData: any): void {
+  saveUserData(userData: any) {
     return this.put({
       user_data: userData
     })
@@ -75,5 +79,7 @@ export default class CartContentRequest extends AbstractRequest {
 interface IAddToCartProduct {
   product_id: number;
   amount: number;
-  product_options: Array<any>;
+  product_options?: Array<any>;
 }
+
+export default CartRequest

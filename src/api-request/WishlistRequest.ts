@@ -1,14 +1,18 @@
-import { IApiRequestConfig } from './IApiRequestConfig'
+import { AxiosInstance } from 'axios'
 
-import { IConfig } from '../config/IConfig'
+import Config from '../config/Config'
 import AbstractRequest from './AbstractRequest'
 
 export default class WishlistRequest extends AbstractRequest {
-  entityPath: string = 'wish_list'
-  prefix: string = 'sra_'
+  entityPath: string = 'wish_list';
+  prefix: string = 'sra_';
+  handlerParams: any;
+  params: any;
 
-  constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig) {
-    super(handlerParams, params, config)
+  constructor(client: AxiosInstance, config: Config) {
+    super(client, config)
+    this.handlerParams = {};
+    this.params = {};
   }
 
   protected buildUrl(): string {
@@ -18,10 +22,10 @@ export default class WishlistRequest extends AbstractRequest {
     return url
   }
 
-  public add(products: IAddToWishlistProduct): void;
-  public add(products: Array<IAddToWishlistProduct>): void;
+  public add(products: IAddToWishlistProduct): any;
+  public add(products: Array<IAddToWishlistProduct>): any;
 
-  public add(products: IAddToWishlistProduct | Array<IAddToWishlistProduct>): void {
+  public add(products: IAddToWishlistProduct | Array<IAddToWishlistProduct>) {
     let requestProducts: any = {};
 
     if (Array.isArray(products)) {
@@ -45,7 +49,7 @@ export default class WishlistRequest extends AbstractRequest {
     })
   }
 
-  public remove(): void {
+  public remove() {
     return this.delete()
   }
 

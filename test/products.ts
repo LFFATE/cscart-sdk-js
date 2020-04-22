@@ -56,10 +56,12 @@ describe('products', function() {
         language:   'en',
         sl:         'en',
         lang_code:  'en',
+        client:     'spa',
         q: 'shirt',
       })
       .reply(200)
 
+    api.setClientId('spa')
     api.setLanguage('en')
 
     const result = await api.products.search('shirt').get();

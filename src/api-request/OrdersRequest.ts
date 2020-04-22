@@ -25,6 +25,7 @@ export default class OrdersRequest extends AbstractRequest {
     this.params = {
       ...this.params,
       get_orders_data: true,
+      get_children_orders_data: true,
     }
 
     return super.get()

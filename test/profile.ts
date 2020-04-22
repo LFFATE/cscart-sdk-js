@@ -96,4 +96,22 @@ describe('profile', function() {
 
     assert.equal(result.status, '201')
   })
+
+  it('Create profile', async function() {
+    nock('https://cscart-sdk.com')
+      .put(/^\/api\/4.0\/sra_profile\/1/,  {
+        email: "cscart@demo.com",
+        password1: "12345",
+        password2: "12345"
+      })
+      .reply(201)
+
+    const result = await api.profile.update({
+      email: "cscart@demo.com",
+      password1: "12345",
+      password2: "12345"
+    });
+
+    assert.equal(result.status, '201')
+  })
 });

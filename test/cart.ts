@@ -46,10 +46,6 @@ describe('cart', function() {
       })
       .reply(201)
 
-    nock('https://cscart-sdk.com')
-      .delete(/^\/api\/4.0\/sra_cart_content\/\d+/)
-      .reply(204)
-
     api = new CsCartApiSdk({
         username: 'lffate@cscart.sdk',
         apiKey: '008005ae5b0f45',
@@ -109,6 +105,11 @@ describe('cart', function() {
   })
 
   it('should remove a product from the cart', async function() {
+    nock('https://cscart-sdk.com')
+      .delete(/^\/api\/4.0\/sra_cart_content\/145642/)
+      .reply(204)
+
+    api.setClientId('sd_spa')
     const result = await api.cart.one(145642).delete();
 
     assert.equal(result.status, '204')

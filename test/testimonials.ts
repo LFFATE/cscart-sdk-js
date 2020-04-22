@@ -27,6 +27,17 @@ describe('testimonials', function() {
     assert.equal(result.status, '200')
   })
 
+  it('Get for article', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_discussion/')
+      .query({object_id: 101, object_type: 'A'})
+      .reply(200)
+
+    const result = await api.testimonials.forArticle(101).get();
+
+    assert.equal(result.status, '200')
+  })
+
   it('Get for product with search', async function() {
     nock('https://cscart-sdk.com')
       .get('/api/4.0/sra_discussion/')

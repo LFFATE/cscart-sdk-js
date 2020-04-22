@@ -73,6 +73,14 @@ export default class ProfileRequest extends AbstractRequest {
     return this
   }
 
+  update(profile: any) {
+
+    return this.client.put(
+      this.buildUrl() + '1',
+      profile
+    )
+  }
+
   public create(profile: any) {
 
     return this.post(profile)

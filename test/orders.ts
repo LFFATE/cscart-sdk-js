@@ -22,7 +22,8 @@ describe('orders', function() {
     nock('https://cscart-sdk.com')
       .get('/api/4.0/sra_orders/')
       .query({
-        get_orders_data:   true,
+        get_orders_data: true,
+        get_children_orders_data: true,
       })
       .reply(200)
 
@@ -103,6 +104,7 @@ describe('orders', function() {
       .get('/api/4.0/sra_orders/')
       .query({
         get_orders_data:   true,
+        get_children_orders_data: true,
         sort_by: 'date',
         sort_order: 'asc'
       })
@@ -116,6 +118,7 @@ describe('orders', function() {
       .get('/api/4.0/sra_orders/')
       .query({
         get_orders_data:   true,
+        get_children_orders_data: true,
         sort_by: 'date',
         sort_order: 'desc'
       })

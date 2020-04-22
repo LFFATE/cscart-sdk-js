@@ -17,10 +17,12 @@ declare class CsCartApiSdk {
     readonly settings: any;
     readonly testimonials: any;
     readonly vendors: any;
+    readonly notifications: any;
     private getNewApiRequest;
     getConfig(): IConfig;
     getClient(): AxiosInstance;
     setLanguage(language: string): void;
+    setClientId(id: string): void;
     setUserToken(token: string): void;
 }
 export default CsCartApiSdk;

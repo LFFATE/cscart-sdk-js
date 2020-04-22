@@ -25,6 +25,13 @@ class CsCartApiSdk {
       newConf.headers.common['Storefront-Api-Access-Key'] = this.config.apiKey;
       newConf.headers.common['Cache-Control'] = 'no-cache';
 
+      if (this.config.client) {
+        newConf.params = {
+          ...newConf.params,
+          client: this.config.client,
+        }
+      }
+
       if (this.config.userToken) {
         newConf.headers.common.Authorization = `Basic ${Base64.encode(this.config.userToken)}:`;
       }
@@ -85,6 +92,10 @@ class CsCartApiSdk {
   get vendors() {
     return this.getNewApiRequest('vendors')
   }
+
+  get notifications() {
+    return this.getNewApiRequest('notification')
+  }
   //---
 
   private getNewApiRequest(type: string) {
@@ -109,6 +120,10 @@ class CsCartApiSdk {
 
   public setLanguage(language: string): void {
     this.config.language = language;
+  }
+
+  public setClientId(id: string): void {
+    this.config.client = id;
   }
 
   public setUserToken(token: string): void {

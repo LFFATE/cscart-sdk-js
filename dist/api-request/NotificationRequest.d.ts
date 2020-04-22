@@ -1,17 +1,15 @@
 import { IApiRequestConfig } from './IApiRequestConfig';
 import { IConfig } from '../config/IConfig';
 import AbstractRequest from './AbstractRequest';
-export default class ProfileRequest extends AbstractRequest {
+export default class NotificationRequest extends AbstractRequest {
     entityPath: string;
     prefix: string;
     constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
-    protected buildUrl(): string;
-    form(): this;
-    forAddProfile(): this;
-    forUpdateProfile(): this;
-    forAddOrder(): this;
-    forUpdateOrder(): this;
-    update(profile: any): any;
-    create(profile: any): any;
+    /**
+     * Mark user notifications as viewed
+     *
+     * @param lastNotificationDate - all notifications before specified time will be marked as viewed
+     */
+    markAsViewed(lastNotificationDate: string): any;
     protected setParams(): void;
 }

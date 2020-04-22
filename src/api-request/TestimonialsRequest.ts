@@ -24,7 +24,7 @@ export default class TestimonialsRequest extends AbstractRequest {
   }
 
   public forArticle(objectId: number) {
-    this.forItem(objectId, 'C')
+    this.forItem(objectId, 'A')
 
     return this
   }

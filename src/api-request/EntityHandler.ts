@@ -11,6 +11,7 @@ import ProfileRequest from './ProfileRequest'
 import SettingsRequest from './SettingsRequest'
 import TestimonialsRequest from './TestimonialsRequest'
 import VendorsRequest from './VendorsRequest'
+import NotificationRequest from './NotificationRequest'
 
 const EntityHandler: any = {
   CartContentRequest,
@@ -26,6 +27,7 @@ const EntityHandler: any = {
   SettingsRequest,
   TestimonialsRequest,
   VendorsRequest,
+  NotificationRequest,
 }
 
 export default EntityHandler

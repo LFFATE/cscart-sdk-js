@@ -3,6 +3,7 @@ export interface IConfig {
   apiKey: string;
   apiUrl: string;
   siteUrl: string;
+  client?: string;
 
   timeout?: number;
   language?: string;

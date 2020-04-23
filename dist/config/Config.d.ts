@@ -1,4 +1,5 @@
-interface IConfig {
+import IConfig from './IConfig';
+declare class Config implements IConfig {
     username: string;
     apiKey: string;
     apiUrl: string;
@@ -7,5 +8,6 @@ interface IConfig {
     timeout?: number;
     language?: string;
     userToken?: string;
+    constructor(config: IConfig);
 }
-export default IConfig;
+export default Config;

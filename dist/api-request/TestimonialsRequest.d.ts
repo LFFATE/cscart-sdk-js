@@ -1,10 +1,12 @@
-import { IApiRequestConfig } from './IApiRequestConfig';
-import { IConfig } from '../config/IConfig';
+import { AxiosInstance } from 'axios';
+import Config from '../config/Config';
 import AbstractRequest from './AbstractRequest';
 export default class TestimonialsRequest extends AbstractRequest {
     entityPath: string;
     prefix: string;
-    constructor(handlerParams: any, params: IApiRequestConfig, config: IConfig);
+    handlerParams: any;
+    params: any;
+    constructor(client: AxiosInstance, config: Config);
     forProduct(objectId: number): this;
     forCategory(objectId: number): this;
     forArticle(objectId: number): this;
@@ -12,7 +14,7 @@ export default class TestimonialsRequest extends AbstractRequest {
     forStorefront(objectId: number): this;
     forVendor(objectId: number): this;
     protected forItem(objectId: number, objectType: IObjectType): void;
-    create(object_id: number, object_type: IObjectType, name: string, rating_value?: number, message?: string): any;
+    create(object_id: number, object_type: IObjectType, name: string, rating_value?: number, message?: string): import("axios").AxiosPromise<any>;
     protected setParams(): void;
 }
 declare type IObjectType = 'P' | 'C' | 'A' | 'O' | 'E' | 'M';

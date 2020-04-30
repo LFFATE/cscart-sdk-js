@@ -8,11 +8,11 @@ describe('auth_tokens', function() {
 
   beforeEach(() => {
     nock('https://cscart-sdk.com')
-      .post(/^\/api\/4.0\/auth_tokens\//, { email: 'cscart@email.com', password: 'invalid-password' })
+      .post(/^\/api\/4.0\/sra_auth_tokens\//, { email: 'cscart@email.com', password: 'invalid-password' })
       .reply(404)
 
     nock('https://cscart-sdk.com')
-      .post(/^\/api\/4.0\/auth_tokens\//, { email: 'cscart@email.com', password: 'valid-password' })
+      .post(/^\/api\/4.0\/sra_auth_tokens\//, { email: 'cscart@email.com', password: 'valid-password' })
       .reply(201)
 
     api = new CsCartApiSdk({
@@ -48,5 +48,25 @@ describe('auth_tokens', function() {
       .catch((error: any) => error.response);
 
       assert.equal(result.status, 404)
+  })
+
+  it('should request recover password', async function() {
+    nock('https://cscart-sdk.com')
+      .post(/^\/api\/4.0\/sra_recover_password\//, { email: 'cscart@email.com' })
+      .reply(200)
+
+    const result = await api.auth.restorePassword('cscart@email.com')
+
+    assert.equal(result.status, 200)
+  })
+
+  it('should request for login with ekey', async function() {
+    nock('https://cscart-sdk.com')
+      .post(/^\/api\/4.0\/sra_auth_tokens\//, { ekey: 'abcddd435d940' })
+      .reply(200)
+
+    const result = await api.auth.loginWithEkey('abcddd435d940')
+
+    assert.equal(result.status, 200)
   })
 });

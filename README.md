@@ -63,7 +63,9 @@ const api = new CsCartApiSdk({
 ||one(number)|get single category|`api.categories.one(50)`|
 |auth||Auth tokens|`api.auth`|
 ||login(email: string, password: string)|Try to login with email and password|`api.auth.login('user@email.com', 'password').then((response: any) => console.log(response.token))`|
+||loginWithEkey(ekey: string)|Try to login with ekey|`api.auth.loginWithEkey('dfkrto4313fd...').then((response: any) => console.log(response.token))`|
 ||socialLogin(provider: 'google', tokenId: string, clientId: string)|Verify auth for social|`api.auth.socialLogin('google', 'avfgjgjnf...', '10948fhrDs1').then((response: any) => console.log(response.token))`|
+||restorePassword(email: string)|Get email with password restore link|`api.auth.restorePassword('user@email.com').then((response: any) => console.log(response))`|
 |cart||Cart|`api.cart`|
 ||get()|Get cart content|`api.cart.get()`|
 ||withShippings(ids?: Array\<number\>)|response will contains shippings info. Ids - chosen_shipping|`api.cart.withShippings([4, 5]).get()`|

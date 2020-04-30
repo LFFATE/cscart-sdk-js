@@ -1,6 +1,6 @@
 {
   "name": "cscart-sdk",
-  "version": "1.92.8",
+  "version": "1.92.12",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -12,7 +12,8 @@
     "test": "mocha -r ts-node/register ./test/**/*.ts",
     "build": "webpack --config webpack.prod.js",
     "start": "webpack-dev-server --open --config webpack.dev.js",
-    "codecov": "nyc npm run test && nyc report --reporter=text-lcov > coverage.lcov"
+    "codecov": "nyc npm run test && nyc report --reporter=text-lcov > coverage.lcov",
+    "prepublish": "npm run build"
   },
   "keywords": [],
   "author": "",

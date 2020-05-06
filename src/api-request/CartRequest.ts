@@ -1,4 +1,6 @@
 import { AxiosInstance } from 'axios'
+import mapValues from 'lodash/mapValues'
+import keyBy from 'lodash/keyBy'
 
 import Config from '../config/Config'
 import AbstractRequest from './AbstractRequest'
@@ -43,11 +45,17 @@ class CartRequest extends AbstractRequest {
 
     if (Array.isArray(products)) {
       products.map((product: any) => {
+        if (product.product_options && product.product_options.length) {
+          product.product_options = mapValues(keyBy(product.product_options, 'id'), 'value')
+        }
         requestProducts[product.product_id] = {...product};
       })
     } else {
       requestProducts = {
-        [products.product_id]: {...products}
+        [products.product_id]: {
+          ...products,
+          product_options: products.product_options ? mapValues(keyBy(products.product_options, 'id'), 'value') : undefined,
+        }
       };
     }
 
@@ -57,7 +65,10 @@ class CartRequest extends AbstractRequest {
   }
 
   update(product: any) {
-    return this.put(product)
+    return this.put({
+      ...product,
+      product_options: product.product_options ? mapValues(keyBy(product.product_options, 'id'), 'value') : undefined,
+    })
   }
 
   saveUserData(userData: any) {
@@ -79,7 +90,10 @@ class CartRequest extends AbstractRequest {
 interface IAddToCartProduct {
   product_id: number;
   amount: number;
-  product_options?: Array<any>;
+  product_options?: Array<{
+    id:     number;
+    value:  any;
+  }>;
 }
 
 export default CartRequest

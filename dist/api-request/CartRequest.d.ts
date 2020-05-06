@@ -17,6 +17,9 @@ declare class CartRequest extends AbstractRequest {
 interface IAddToCartProduct {
     product_id: number;
     amount: number;
-    product_options?: Array<any>;
+    product_options?: Array<{
+        id: number;
+        value: any;
+    }>;
 }
 export default CartRequest;

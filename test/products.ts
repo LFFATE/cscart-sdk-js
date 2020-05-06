@@ -128,4 +128,17 @@ describe('products', function() {
     assert.equal(result.status, 200)
     expect(result.data).to.have.property('filtered')
   })
+
+  it('should get products by master product id', async function() {
+    nock('https://cscart-sdk.com')
+      .get('/api/4.0/sra_products/')
+      .query({
+        vendor_products_by_product_id: 134
+      })
+      .reply(200)
+
+    const result = await api.products.vendorProducts(134).get();
+
+    assert.equal(result.status, 200)
+  })
 });

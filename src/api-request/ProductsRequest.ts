@@ -21,7 +21,7 @@ export default class ProductsRequest extends AbstractRequest {
     return url
   }
 
-  public forOptions(options: Array<selectedOption>) {
+  forOptions(options: Array<selectedOption>) {
     let selected_options: any = {};
 
     options.forEach(option =>
@@ -33,9 +33,15 @@ export default class ProductsRequest extends AbstractRequest {
     return this
   }
 
-  public forCategory(categoryId: number) {
+  forCategory(categoryId: number) {
     this.params.filter    = 'Y';
     this.params.cid       = categoryId;
+
+    return this
+  }
+
+  vendorProducts(productId: number): ProductsRequest {
+    this.params.vendor_products_by_product_id = productId;
 
     return this
   }

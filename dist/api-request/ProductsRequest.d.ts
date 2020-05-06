@@ -10,6 +10,7 @@ export default class ProductsRequest extends AbstractRequest {
     protected buildUrl(): string;
     forOptions(options: Array<selectedOption>): this;
     forCategory(categoryId: number): this;
+    vendorProducts(productId: number): ProductsRequest;
     withFilters(appliedFiltersHash?: string): this;
     setParams(): void;
 }

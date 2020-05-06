@@ -52,6 +52,7 @@ const api = new CsCartApiSdk({
 ||desc()|Sort by decreasing|`api.products.orderBy('price').desc()`|
 ||forCategory(number)|Get products only for the category|`api.products.forCategory(114)`|
 ||withFilters()|Adds to response filters array|`api.products.withFilters()`|
+||vendorProducts(productId: number)|Get products by master product id|`api.products.vendorProducts(134)`|
 ||forOptions([{ optionId: number, value: any }])|Get product with selected options|`api.products.forOptions([{ optionId: 17, value: 7 }])`|
 |layouts||Layouts and blocks|`api.layouts`|
 ||get()|get layouts list|`api.layouts.get()`|
